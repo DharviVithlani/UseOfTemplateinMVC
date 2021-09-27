@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DataAccessLayer.City>
+@if (Model != null)
+{
+    <option value="0">Select City</option>
+    foreach (var item in Model)
+    {
+        <option value="@item.CityId">@item.CityName</option>
+    }
+}
+

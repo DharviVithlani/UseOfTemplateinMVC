@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DataAccessLayer.State>  
+@if (Model != null)
+{ 
+    <option value="0">Select State</option>
+    foreach (var item in Model)
+    {
+        <option value="@item.StateId">@item.StateName</option>
+    }
+}

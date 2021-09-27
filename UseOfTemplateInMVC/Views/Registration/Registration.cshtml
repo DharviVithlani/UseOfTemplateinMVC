@@ -1,0 +1,179 @@
+﻿@model BusinessLogic.Models.UserData
+@if (Session["id"] == null)
+{
+    Layout = null;
+}
+else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
+<link href="~/CSS/adminlte.min.css" rel="stylesheet" />
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a><b>Admin</b>LTE</a>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <p class="login-box-msg">Register</p>
+                @using (Html.BeginForm("Registration", "Registration", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    if (Session["id"] == null)
+                    {
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserName)
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UserName" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password)
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Enter Password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConfirmPassword)
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Enter Confirm Password" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => model.UserId)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName)
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter FirstName" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName)
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter LastName" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserName)
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UserName", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DOB)
+                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter DOB" } })
+                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gender, new { htmlAttributes = new { @class = "form-check-label" } })
+                            <div class="row">
+                                <div class="col-md-3 form-check">
+                                    @Html.RadioButtonFor(model => model.Gender, "Male", new { htmlAttributes = new { @class = "form-check-input" } })
+                                    <label class="form-check-label">Male</label>
+                                </div>
+                                <div class="col-md-9 form-check">
+                                    @Html.RadioButtonFor(model => model.Gender, "Female", new { htmlAttributes = new { @class = "form-check-input" } })
+                                    <label class="form-check-label">Female</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address)
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Address" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CountryId)
+                            @Html.DropDownListFor(model => model.CountryId,Model.countries, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StateId)
+                            @Html.DropDownListFor(model => model.StateId, Model.states as IEnumerable<SelectListItem> , null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CityId)
+                            @Html.DropDownListFor(model => model.CityId, Model.cities as IEnumerable<SelectListItem>, null, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ZipCode)
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ZipCode" } })
+                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <input type="submit" value="@(Session["id"] != null ? "Update" : "Register")" class="btn btn-primary btn-block" />
+                            </div>
+                        </div>
+                    </div><br />
+                }
+                @if (Session["id"] == null)
+                {
+                    <div class="text-center">
+                        @Html.ActionLink("Login", "Login", "Login")
+                    </div>
+                }
+
+                @if (Model != null)
+                {
+                    <div class="@(Model.isSuccess == true ? "text-success" : "text-danger")">
+                        <h6 id="msg"><b>@Model.ErrorMessage</b></h6>
+                    </div><br />
+                }
+            </div>
+        </div>
+    </div>
+</body>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#msg").fadeOut();
+        }, 5000);
+
+        $("#CountryId").change(function () {
+            var countryid = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Registration/GetStateList?CountryId=" + countryid,
+                contentType: "html",
+                success: function (response) {
+                    $("#StateId").empty();
+                    $("#CityId").empty();
+                    $("#StateId").append(response);
+                    $("#CityId").append('<option value="0">Select City</option>');
+                }
+            });
+        });
+
+        $("#StateId").change(function () {
+            var stateid = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Registration/GetCityList?StateId=" + stateid,
+                contentType: "html",
+                success: function (response) {
+                    $("#CityId").empty();
+                    $("#CityId").append(response);
+                }
+            });
+        });
+    });
+</script>
