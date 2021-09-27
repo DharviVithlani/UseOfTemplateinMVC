@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Data;
-using DataAccessLayer;
+using DataAccess;
 using System.Data.Entity;
 using System.Collections.Generic;
 using BusinessLogic.Models;
@@ -92,10 +92,10 @@ namespace BusinessLogic.Repository
             return citylist;
         }
 
-        public static IEnumerable<uspGetAllMembers_Result> GetMembers()
+        public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search)
         {
             exampleEntities4 db = new exampleEntities4();
-            var memberdata = db.uspGetAllMembers().ToList();
+            var memberdata = db.uspGetAllMembers(search).ToList();
             return memberdata;
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using DataAccessLayer;
+using DataAccess;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Models;
@@ -64,7 +64,6 @@ namespace UseOfTemplateInMVC.Controllers
                     if (ModelState.IsValid)
                     {
                         var userexists = BusinessLogic.Repository.Registration.GetUserByUserName(obj.UserName);
-
                         if (userexists != null)
                         {
                             obj.isSuccess = false;

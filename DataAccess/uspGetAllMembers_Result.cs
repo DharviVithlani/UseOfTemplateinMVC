@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataAccessLayer
+namespace DataAccess
 {
     using System;
     
     public partial class uspGetAllMembers_Result
     {
-        public string UserName { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
         public string FullName { get; set; }
     }
 }

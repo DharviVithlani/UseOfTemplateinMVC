@@ -1,26 +1,60 @@
-﻿@model IEnumerable<DataAccessLayer.uspGetAllMembers_Result>
+﻿@model IEnumerable<DataAccess.uspGetAllMembers_Result>
 @{
     ViewBag.Title = "Members";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/CSS/MemberPage/toastr.min.css" rel="stylesheet" />
 <link href="~/CSS/MemberPage/bootstrap-4.min.css" rel="stylesheet" />
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Members</h3>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Members</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="breadcrumb-item active">Members</li>
+                </ol>
+            </div>
+        </div>
     </div>
-    <table class="table table-striped">
-        <thead>
+</section>
+<table class="table table-striped">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="input-group">
+                @using (Html.BeginForm("Members", "Members", FormMethod.Get))
+                {
+                    @Html.TextBox("search", null, new { @class = "form-control form-control-lg", placeholder = "Type your keywords here" })
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-lg btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>&nbsp;&nbsp;&nbsp;
+    <thead>
+        <tr>
+            <th style="width: 90px">No.</th>
+            <th style="width: 600px">FullName</th>
+            <th style="width: 700px">UserName</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count()==0)
+        {
             <tr>
-                <th style="width: 90px">No.</th>
-                <th style="width: 500px">FullName</th>
-                <th>UserName</th>
-                <th>Action</th>
+                <td colspan="5" class="text-center"> Records not found </td>
             </tr>
-        </thead>
-        <tbody>
-            @{int i = 1;}
-            @foreach (var item in Model)
+        }
+        else
+        {
+            int i = 1;
+            foreach (var item in Model)
             {
                 <tr id="row_@item.UserId">
                     <td>
@@ -35,18 +69,16 @@
                             <div class="col-md-6">
                                 @Html.ActionLink("Edit", "Registration", "Registration", new { id = item.UserId }, new { @class = "btn btn-block btn-outline-primary" })
                             </div>
-
                             <div class="col-md-6">
-                                @*@Html.ActionLink("Delete", "Delete", "Members", new { @class = "btn btn-block btn-outline-danger", data_toggle = "modal", data_target = "#modal-default" })*@
                                 <a href="#" class="btn btn-block btn-outline-danger" onclick="ConfirmDelete(@item.UserId)">Delete</a>
                             </div>
                         </div>
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
 
 <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
