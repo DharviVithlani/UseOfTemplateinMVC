@@ -165,8 +165,6 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.svg" />
-    <Content Include="CSS\MemberPage\bootstrap-4.min.css" />
-    <Content Include="CSS\MemberPage\toastr.min.css" />
     <Content Include="Image\web-design-background_1300-39.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -199,7 +197,7 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\Layoutpage\jquery.min.js" />
+    <Content Include="Scripts\Layoutpage\bootstrap.bundle.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -215,10 +213,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MemberPage\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\MemberPage\demo.js" />
-    <Content Include="Scripts\MemberPage\sweetalert2.min.js" />
-    <Content Include="Scripts\MemberPage\toastr.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
