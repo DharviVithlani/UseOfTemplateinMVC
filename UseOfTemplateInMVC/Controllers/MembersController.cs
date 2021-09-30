@@ -9,16 +9,26 @@ namespace UseOfTemplateInMVC.Controllers
     public class MembersController : Controller
     {
         // GET: Members
-        public ActionResult Members()
+        public ActionResult Members(string search, string command)
         {
-            var memberdata = BusinessLogic.Repository.Registration.GetMembers();
-            return View(memberdata);
+            if (command == "Close")
+            {
+                var memberdata = BusinessLogic.Repository.Registration.GetMembers("");
+                ModelState.Clear();
+                return View(memberdata);
+            }
+            else
+            {
+                var memberdata = BusinessLogic.Repository.Registration.GetMembers(search ?? "");
+                return View(memberdata);
+            }
         }
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id, string search)
         {
             BusinessLogic.Repository.Registration.DeleteRow(id);
-            return RedirectToAction("Members");
+            var memberdata = BusinessLogic.Repository.Registration.GetMembers(search ?? "");
+            return Json(memberdata.Count(), JsonRequestBehavior.AllowGet);
         }
     }
 }

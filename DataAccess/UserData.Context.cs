@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataAccessLayer
+namespace DataAccess
 {
     using System;
     using System.Data.Entity;
@@ -32,15 +32,6 @@ namespace DataAccessLayer
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual ObjectResult<uspGetUserbyName_Result> uspGetUserbyName(string name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetUserbyName_Result>("uspGetUserbyName", nameParameter);
-        }
-    
         public virtual ObjectResult<uspGetUserByUserName_Result> uspGetUserByUserName(string userName)
         {
             var userNameParameter = userName != null ?
@@ -50,11 +41,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetUserByUserName_Result>("uspGetUserByUserName", userNameParameter);
         }
     
-        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers");
-        }
-    
         public virtual ObjectResult<uspfordelete_Result> uspfordelete(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -62,6 +48,15 @@ namespace DataAccessLayer
                 new ObjectParameter("Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspfordelete_Result>("uspfordelete", idParameter);
+        }
+    
+        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers(string searchBy)
+        {
+            var searchByParameter = searchBy != null ?
+                new ObjectParameter("SearchBy", searchBy) :
+                new ObjectParameter("SearchBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers", searchByParameter);
         }
     }
 }

@@ -72,9 +72,8 @@
         <Function Name="uspfordelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
-        <Function Name="uspGetAllMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="uspGetUserbyName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Name" Type="varchar" Mode="In" />
+        <Function Name="uspGetAllMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchBy" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="uspGetUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
@@ -160,26 +159,17 @@
             <End Role="Country" EntitySet="Countries" />
             <End Role="State" EntitySet="States" />
           </AssociationSet>
-          <FunctionImport Name="uspGetUserbyName" ReturnType="Collection(exampleModel.uspGetUserbyName_Result)">
-          <Parameter Name="Name" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="uspGetUserByUserName" ReturnType="Collection(exampleModel.uspGetUserByUserName_Result)">
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Users" EntityType="exampleModel.User" />
-          <FunctionImport Name="uspGetAllMembers" ReturnType="Collection(exampleModel.uspGetAllMembers_Result)" />
           <FunctionImport Name="uspfordelete" ReturnType="Collection(exampleModel.uspfordelete_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetAllMembers" ReturnType="Collection(exampleModel.uspGetAllMembers_Result)">
+            <Parameter Name="SearchBy" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="uspGetUserbyName_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="ConfirmPassword" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="uspGetUserByUserName_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
@@ -211,11 +201,6 @@
           <Property Name="CityId" Type="Int32" />
           <Property Name="ZipCode" Type="Int32" />
         </EntityType>
-        <ComplexType Name="uspGetAllMembers_Result">
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="FullName" Nullable="true" MaxLength="42" />
-        </ComplexType>
         <ComplexType Name="uspfordelete_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
@@ -229,6 +214,11 @@
           <Property Type="Int32" Name="StateId" Nullable="true" />
           <Property Type="Int32" Name="CityId" Nullable="true" />
           <Property Type="Int32" Name="ZipCode" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="uspGetAllMembers_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="42" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -262,18 +252,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspGetUserbyName" FunctionName="exampleModel.Store.uspGetUserbyName">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="exampleModel.uspGetUserbyName_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="uspGetUserByUserName" FunctionName="exampleModel.Store.uspGetUserByUserName">
             <ResultMapping>
               <ComplexTypeMapping TypeName="exampleModel.uspGetUserByUserName_Result">
@@ -310,15 +288,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspGetAllMembers" FunctionName="exampleModel.Store.uspGetAllMembers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="exampleModel.uspGetAllMembers_Result">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="uspfordelete" FunctionName="exampleModel.Store.uspfordelete">
             <ResultMapping>
               <ComplexTypeMapping TypeName="exampleModel.uspfordelete_Result">
@@ -334,6 +303,15 @@
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetAllMembers" FunctionName="exampleModel.Store.uspGetAllMembers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="exampleModel.uspGetAllMembers_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
