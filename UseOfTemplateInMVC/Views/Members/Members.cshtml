@@ -25,7 +25,7 @@
                 @using (Html.BeginForm("Members", "Members", FormMethod.Get))
                 {
                     <div class="input-group">
-                        @Html.TextBox("search", null, new { @class = "form-control form-control-lg", placeholder = "Type your keywords here" })
+                        @Html.TextBox("search", null, new { @class = "form-control form-control-lg", placeholder = "Type your keywords here", @id = "txtsearch" })
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-lg btn-default" name="command" value="Search">
                                 <i class="fa fa-search"></i>
@@ -47,13 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Count() == 0)
-                        {
-                            <tr>
-                                <td colspan="5" class="text-center"> Records not found </td>
-                            </tr>
-                        }
-                        else
+                        @if (Model.Count() > 0)
                         {
                             int i = 1;
                             foreach (var item in Model)
@@ -78,6 +72,12 @@
                                     </td>
                                 </tr>
                             }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center"> Records not found </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -106,20 +106,29 @@
     </div>
 </section>
 <script type="text/javascript">
-    var ConfirmDelete = function (userid,username) {
+    var ConfirmDelete = function (userid, username) {
         $("#hiddenuserid").val(userid);
         $("#lblusername").text(username);
-        $("#modal-default").modal('show');  
+        $("#modal-default").modal('show');
     }
-    var DeleteUser = function () {  
+    var DeleteUser = function () {
         var id = $("#hiddenuserid").val();
+        var search = $("#txtsearch").val();
         $.ajax({
             type: "POST",
             url: "/Members/Delete",
-            data: { id: id },
+            data: {
+                id: id,
+                search: search
+            },
             success: function (result) {
                 $("#modal-default").modal("hide");
                 $("#row_" + id).remove();
+                if (result == 0) {
+                    markup = "<tr><td colspan='5' class='text-center'>Records not found</td></tr>";
+                    tableBody = $("table tbody");
+                    tableBody.append(markup);
+                }
             }
         })
     }

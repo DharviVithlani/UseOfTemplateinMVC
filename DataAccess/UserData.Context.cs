@@ -32,15 +32,6 @@ namespace DataAccess
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual ObjectResult<uspGetUserbyName_Result> uspGetUserbyName(string name)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetUserbyName_Result>("uspGetUserbyName", nameParameter);
-        }
-    
         public virtual ObjectResult<uspGetUserByUserName_Result> uspGetUserByUserName(string userName)
         {
             var userNameParameter = userName != null ?

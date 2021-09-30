@@ -236,7 +236,6 @@
     <Content Include="Views\Registration\Registration.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Contact\Contact.cshtml" />
-    <Content Include="Views\DisplayStates.cshtml" />
     <Content Include="Views\Registration\GetStateList.cshtml" />
     <Content Include="Views\Registration\GetCityList.cshtml" />
     <Content Include="Views\Members\Members.cshtml" />

@@ -11,7 +11,7 @@ namespace UseOfTemplateInMVC.Controllers
         // GET: Members
         public ActionResult Members(string search, string command)
         {
-           if (command == "Close")
+            if (command == "Close")
             {
                 var memberdata = BusinessLogic.Repository.Registration.GetMembers("");
                 ModelState.Clear();
@@ -24,10 +24,11 @@ namespace UseOfTemplateInMVC.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id, string search)
         {
             BusinessLogic.Repository.Registration.DeleteRow(id);
-            return RedirectToAction("Members");
+            var memberdata = BusinessLogic.Repository.Registration.GetMembers(search ?? "");
+            return Json(memberdata.Count(), JsonRequestBehavior.AllowGet);
         }
     }
 }
