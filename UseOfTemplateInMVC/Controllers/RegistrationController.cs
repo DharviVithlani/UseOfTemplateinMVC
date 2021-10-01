@@ -9,6 +9,7 @@ namespace UseOfTemplateInMVC.Controllers
 {
     public class RegistrationController : Controller
     {
+        [AllowAnonymous]
         public ActionResult NewRegistration()
         {
             return View("Registration");
