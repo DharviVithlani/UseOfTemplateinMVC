@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3bf1934aa524b32bb69557205ebd8bb" Name="Diagram1">
-        <EntityTypeShape EntityType="exampleModel.City" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="exampleModel.Country" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="exampleModel.State" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="exampleModel.FK__City__StateId__656C112C" ManuallyRouted="false" />
-        <AssociationConnector Association="exampleModel.FK__State__CountryId__628FA481" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="exampleModel.User" Width="1.5" PointX="0.75" PointY="3.75" />
-      </Diagram>
+      <Diagram DiagramId="4b77780e9b664e01b140e0ae126cb87e" Name="Diagram1">
+        <EntityTypeShape EntityType="exampleModel.User" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="exampleModel.City" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="exampleModel.Country" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="exampleModel.State" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="exampleModel.FK__City__StateId__36B12243" />
+        <AssociationConnector Association="exampleModel.FK__State__CountryId__35BCFE0A" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

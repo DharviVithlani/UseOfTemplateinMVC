@@ -99,9 +99,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserData.edmx</DependentUpon>
     </Compile>
-    <Compile Include="uspfordelete_Result.cs">
-      <DependentUpon>UserData.tt</DependentUpon>
-    </Compile>
     <Compile Include="uspGetAllMembers_Result.cs">
       <DependentUpon>UserData.tt</DependentUpon>
     </Compile>
