@@ -15,10 +15,10 @@ namespace DataAccess
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class exampleEntities4 : DbContext
+    public partial class exampleEntities : DbContext
     {
-        public exampleEntities4()
-            : base("name=exampleEntities4")
+        public exampleEntities()
+            : base("name=exampleEntities")
         {
         }
     
@@ -32,6 +32,23 @@ namespace DataAccess
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
+        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers(string searchBy, string sortby, string sorttype)
+        {
+            var searchByParameter = searchBy != null ?
+                new ObjectParameter("SearchBy", searchBy) :
+                new ObjectParameter("SearchBy", typeof(string));
+    
+            var sortbyParameter = sortby != null ?
+                new ObjectParameter("sortby", sortby) :
+                new ObjectParameter("sortby", typeof(string));
+    
+            var sorttypeParameter = sorttype != null ?
+                new ObjectParameter("sorttype", sorttype) :
+                new ObjectParameter("sorttype", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers", searchByParameter, sortbyParameter, sorttypeParameter);
+        }
+    
         public virtual ObjectResult<uspGetUserByUserName_Result> uspGetUserByUserName(string userName)
         {
             var userNameParameter = userName != null ?
@@ -39,24 +56,6 @@ namespace DataAccess
                 new ObjectParameter("UserName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetUserByUserName_Result>("uspGetUserByUserName", userNameParameter);
-        }
-    
-        public virtual ObjectResult<uspfordelete_Result> uspfordelete(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspfordelete_Result>("uspfordelete", idParameter);
-        }
-    
-        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers(string searchBy)
-        {
-            var searchByParameter = searchBy != null ?
-                new ObjectParameter("SearchBy", searchBy) :
-                new ObjectParameter("SearchBy", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers", searchByParameter);
         }
     }
 }

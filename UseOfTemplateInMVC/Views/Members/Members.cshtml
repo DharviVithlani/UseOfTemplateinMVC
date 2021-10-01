@@ -41,8 +41,8 @@
                     <thead>
                         <tr>
                             <th style="width: 90px">No.</th>
-                            <th style="width: 600px">FullName</th>
-                            <th style="width: 700px">UserName</th>
+                            <th style="width: 600px">@Html.ActionLink("FullName", "Members", new { search = ViewBag.Search,sortby = "FullName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
+                            <th style="width: 700px">@Html.ActionLink("UserName", "Members", new { search = ViewBag.Search,sortby = "UserName", sorttype = ViewBag.SortType ,pSortOn=ViewBag.SortBy})</th>
                             <th>Action</th>
                         </tr>
                     </thead>

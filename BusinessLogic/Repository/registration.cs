@@ -11,14 +11,14 @@ namespace BusinessLogic.Repository
     {
         public static uspGetUserByUserName_Result GetUserByUserName(string name)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var editrow = db.uspGetUserByUserName(name).FirstOrDefault();
             return editrow;
 
         }
         public static UserData GetUserById(int id)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var userdata = new UserData();
             var editrow = db.Users.Where(m => m.UserId == id).FirstOrDefault();
             if (editrow != null)
@@ -42,7 +42,7 @@ namespace BusinessLogic.Repository
 
         public static void AddUpdateUser(UserData obj)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
 
             if (obj.UserId == 0)
             {
@@ -73,35 +73,35 @@ namespace BusinessLogic.Repository
 
         public static IEnumerable<Country> GetCountries()
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var countrylist = db.Countries.ToList();
             return countrylist;
         }
 
         public static IEnumerable<State> GetStates(int id)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var statelist = db.States.Where(m => m.CountryId == id).ToList();
             return statelist;
         }
 
         public static IEnumerable<City> GetCities(int id)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var citylist = db.Cities.Where(m => m.StateId == id).ToList();
             return citylist;
         }
 
-        public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search)
+        public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search,string searchby, string searchtype)
         {
-            exampleEntities4 db = new exampleEntities4();
-            var memberdata = db.uspGetAllMembers(search).ToList();
+            exampleEntities db = new exampleEntities();
+            var memberdata = db.uspGetAllMembers(search,searchby, searchtype).ToList();
             return memberdata;
         }
 
         public static void DeleteRow(int id)
         {
-            exampleEntities4 db = new exampleEntities4();
+            exampleEntities db = new exampleEntities();
             var deleterow = db.Users.Where(m => m.UserId == id).FirstOrDefault();
             if (deleterow != null)
             {
