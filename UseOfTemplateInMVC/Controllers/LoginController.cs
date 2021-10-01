@@ -8,11 +8,13 @@ namespace UseOfTemplateInMVC.Controllers
     public class LoginController : Controller
     {
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(login obj)
         {
             try
@@ -42,7 +44,7 @@ namespace UseOfTemplateInMVC.Controllers
             }
             return View(obj);
         }
-
+    
         public ActionResult Logout()
         {
             Session.Abandon();
