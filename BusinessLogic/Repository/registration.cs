@@ -43,7 +43,6 @@ namespace BusinessLogic.Repository
         public static void AddUpdateUser(UserData obj)
         {
             exampleEntities db = new exampleEntities();
-
             if (obj.UserId == 0)
             {
                 var userdata = new User();
@@ -108,6 +107,13 @@ namespace BusinessLogic.Repository
                 db.Entry(deleterow).State = EntityState.Deleted;
                 db.SaveChanges();
             }
+        }
+
+        public static string UpdateUser(int id,string imagepath)
+        {
+            exampleEntities db = new exampleEntities();
+            var userdata = db.uspUploadProfile(id, imagepath).ToString();
+            return userdata;
         }
     }
 }

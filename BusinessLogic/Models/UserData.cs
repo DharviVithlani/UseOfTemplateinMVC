@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -15,12 +16,9 @@ namespace BusinessLogic.Models
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string UserName { get; set; }
 
-
         [Required(ErrorMessage = "Password is required field.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-      
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -37,10 +35,11 @@ namespace BusinessLogic.Models
         [Display(Name = "City")]
         public Nullable<int> CityId { get; set; }
 
-
         [RegularExpression(@"\d{6}", ErrorMessage = "ZipCode must be in 6 digits.")]
         public Nullable<int> ZipCode { get; set; }
 
+        [DisplayName("Choose File")]
+        public string ProfileImage { get; set; }
 
         //Extra columns
 
@@ -52,7 +51,6 @@ namespace BusinessLogic.Models
         public string ErrorMessage { get; set; }
 
         public bool isSuccess { get; set; }
-        
         public IEnumerable<SelectListItem> countries { get; set; }
 
         public IEnumerable<SelectListItem> states { get; set; }

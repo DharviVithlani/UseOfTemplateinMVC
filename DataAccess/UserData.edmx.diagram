@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4b77780e9b664e01b140e0ae126cb87e" Name="Diagram1">
-        <EntityTypeShape EntityType="exampleModel.User" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="exampleModel.City" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="exampleModel.Country" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="exampleModel.State" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="exampleModel.FK__City__StateId__36B12243" />
         <AssociationConnector Association="exampleModel.FK__State__CountryId__35BCFE0A" />
+        <EntityTypeShape EntityType="exampleModel.User" Width="1.5" PointX="0.75" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -81,7 +81,7 @@
                         }
                     </tbody>
                 </table>
-                <div class="modal fade" id="modal-default">
+                <div class="modal fade" id="modal-delete">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -109,11 +109,11 @@
     var ConfirmDelete = function (userid, username) {
         $("#hiddenuserid").val(userid);
         $("#lblusername").text(username);
-        $("#modal-default").modal('show');
+        $("#modal-delete").modal('show');
     }
     var DeleteUser = function () {
         var id = $("#hiddenuserid").val();
-        var search = $("#txtsearch").val();
+        var search = $("#txtsearch").val(); 
         $.ajax({
             type: "POST",
             url: "/Members/Delete",
@@ -122,7 +122,7 @@
                 search: search
             },
             success: function (result) {
-                $("#modal-default").modal("hide");
+                $("#modal-delete").modal("hide");
                 $("#row_" + id).remove();
                 if (result == 0) {
                     markup = "<tr><td colspan='5' class='text-center'>Records not found</td></tr>";
