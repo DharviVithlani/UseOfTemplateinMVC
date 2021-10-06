@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Models;
 using BusinessLogic.Repository;
+using BusinessLogic.Common;
 
 namespace UseOfTemplateInMVC.Controllers
 {
@@ -24,7 +25,7 @@ namespace UseOfTemplateInMVC.Controllers
             {
                 if (file.ContentLength > 0)
                 {
-                    string _path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Images/ProfileImages"), file.FileName);
+                    string _path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(Constants.ImagePath), file.FileName);
                     file.SaveAs(_path);
                     Registration.UpdateUser(Convert.ToInt32(Session["id"]), file.FileName);
                     Session["image"] = file.FileName;
