@@ -41,6 +41,8 @@ namespace BusinessLogic.Models
         [DisplayName("Choose File")]
         public string ProfileImage { get; set; }
 
+        public int ModifiedBy { get; set; }
+
         //Extra columns
 
         [Required(ErrorMessage = "ConfirmPassword is required field.")]

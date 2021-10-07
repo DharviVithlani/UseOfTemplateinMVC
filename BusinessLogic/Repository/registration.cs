@@ -4,6 +4,7 @@ using DataAccess;
 using System.Data.Entity;
 using System.Collections.Generic;
 using BusinessLogic.Models;
+using System;
 
 namespace BusinessLogic.Repository
 {
@@ -48,6 +49,7 @@ namespace BusinessLogic.Repository
                 var userdata = new User();
                 userdata.UserName = obj.UserName;
                 userdata.Password = obj.Password;
+                userdata.CreatedDate = DateTime.Now;
                 db.Users.Add(userdata);
             }
             else
@@ -64,6 +66,8 @@ namespace BusinessLogic.Repository
                     editdata.StateId = obj.StateId;
                     editdata.CityId = obj.CityId;
                     editdata.ZipCode = obj.ZipCode;
+                    editdata.ModifiedDate = DateTime.Now;
+                    editdata.ModifiedBy = obj.ModifiedBy;
                     db.Entry(editdata).State = EntityState.Modified;
                 }
             }
@@ -114,6 +118,6 @@ namespace BusinessLogic.Repository
             exampleEntities db = new exampleEntities();
             var userdata = db.uspUploadProfile(id, imagepath).ToString();
             return userdata;
-        }
+        }    
     }
 }

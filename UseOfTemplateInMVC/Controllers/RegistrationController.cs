@@ -49,6 +49,7 @@ namespace UseOfTemplateInMVC.Controllers
             {
                 if (obj.UserId != 0)
                 {
+                    obj.ModifiedBy = Convert.ToInt32(Session["id"]);
                     BusinessLogic.Repository.Registration.AddUpdateUser(obj);
                     if (Convert.ToInt32(Session["id"]) == obj.UserId)
                     {
