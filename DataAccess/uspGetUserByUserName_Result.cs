@@ -25,5 +25,6 @@ namespace DataAccess
         public Nullable<int> StateId { get; set; }
         public Nullable<int> CityId { get; set; }
         public Nullable<int> ZipCode { get; set; }
+        public string ProfileImage { get; set; }
     }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="../CSS/adminlte.min.css" rel="stylesheet" />
+    <link href="~/CSS/default.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -29,28 +30,23 @@
                 </li>
             </ul>
         </nav>
-
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="#" class="brand-link">
-                <img src="~/Image/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="~/Images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/Image/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="~/Images/ProfileImages/@Session["image"]" id="userimage" class="img-circle elevation-2 cursor-pointer " alt="User Image" title="Upload Profile" data-toggle="modal" data-target="#modal-default">
                     </div>
                     <div class="info">
-                        @if (Session["name"] != null)
-                        {
-                            @Html.ActionLink("Welcome    " + Session["name"], "Registration", "Registration", new { id = Session["id"] }, null)
-                        }
+                        @Html.ActionLink("Welcome, " + Session["name"], "Registration", "Registration", new { id = Session["id"] }, null)
                     </div>
                 </div>
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
                         <li class="nav-item">
                             <div class="nav-link">
                                 @Html.ActionLink("About US", "About", "About")
@@ -83,9 +79,15 @@
             </div>
         </footer>
     </div>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            @Html.Partial("~/Views/Upload/_Upload.cshtml");
+        </div>
+    </div>
 </body>
 </html>
 @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/Layoutpage/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/Uploadpage/bs-custom-file-input.min.js"></script>
 <script src="~/Scripts/Layoutpage/adminlte.min.js"></script>

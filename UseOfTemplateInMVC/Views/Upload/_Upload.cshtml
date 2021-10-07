@@ -1,0 +1,55 @@
+﻿@using (Ajax.BeginForm("Upload", "Upload", null, new AjaxOptions { OnSuccess = "OnSuccess", OnBegin = "OnBegin" }, new { enctype = "multipart/form-data" }))
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Profile Picture.</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="ProfileImage" name="file" onchange="uploadmessage()">
+                        <label for="ProfileImage" class="custom-file-label">Choose File</label>
+                    </div>
+                </div>
+            </div>
+            <p class="text-danger" id="message"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        bsCustomFileInput.init();
+
+        //bind event
+        //$('#ProfileImage').on('change', function () {
+        //   uploadmessage();
+        //});
+    });
+
+    function OnBegin() {
+        var imagename = $("#ProfileImage").val();
+        if (imagename == "") {
+            $("#message").text("Please choose an Image.");
+            return false;
+        }
+    }
+
+    function OnSuccess(file) {
+        $("#modal-default").modal("hide");
+        $('#userimage').attr("src", "/Images/ProfileImages/" + file);
+    }
+
+    function uploadmessage() {
+        $("#message").text("");
+    }
+</script>

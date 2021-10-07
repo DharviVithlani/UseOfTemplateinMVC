@@ -134,6 +134,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -149,6 +150,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CSS\adminlte.min.css" />
     <Content Include="CSS\all.min.css" />
+    <Content Include="CSS\default.css" />
     <Content Include="CSS\fontawesome-free\css\all.css" />
     <Content Include="CSS\fontawesome-free\css\all.min.css" />
     <Content Include="CSS\fontawesome-free\css\brands.css" />
@@ -166,13 +168,14 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.svg" />
-    <Content Include="Image\web-design-background_1300-39.jpg" />
+    <Content Include="Images\ProfileImages\Default.jpg" />
+    <Content Include="Images\web-design-background_1300-39.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Image\AdminLTELogo.png" />
-    <Content Include="Image\user2-160x160.jpg" />
+    <Content Include="Images\AdminLTELogo.png" />
+    <Content Include="Images\user2-160x160.jpg" />
     <Content Include="Scripts\Layoutpage\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -220,6 +223,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script-custom-validator.js" />
+    <Content Include="Scripts\Uploadpage\bs-custom-file-input.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -240,6 +244,7 @@
     <Content Include="Views\Registration\GetStateList.cshtml" />
     <Content Include="Views\Registration\GetCityList.cshtml" />
     <Content Include="Views\Members\Members.cshtml" />
+    <Content Include="Views\Upload\_Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

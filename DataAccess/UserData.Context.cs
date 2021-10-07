@@ -57,5 +57,18 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetUserByUserName_Result>("uspGetUserByUserName", userNameParameter);
         }
+    
+        public virtual int uspUploadProfile(Nullable<int> id, string imagepath)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var imagepathParameter = imagepath != null ?
+                new ObjectParameter("imagepath", imagepath) :
+                new ObjectParameter("imagepath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUploadProfile", idParameter, imagepathParameter);
+        }
     }
 }

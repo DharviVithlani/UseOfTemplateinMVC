@@ -18,16 +18,9 @@ namespace UseOfTemplateInMVC.Controllers
         {
             try
             {
-                if (id==0)
-                {
-                    return View();
-                }
-                else
-                {
-                    var model = BusinessLogic.Repository.Registration.GetUserById(id);
-                    GetDropDownData(model);
-                    return View(model);
-                }
+                var model = BusinessLogic.Repository.Registration.GetUserById(id);
+                GetDropDownData(model);
+                return View(model);
             }
             catch (Exception e)
             {
@@ -48,6 +41,7 @@ namespace UseOfTemplateInMVC.Controllers
             return PartialView("GetCityList", citylist);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Registration(UserData obj)
         {
@@ -55,7 +49,12 @@ namespace UseOfTemplateInMVC.Controllers
             {
                 if (obj.UserId != 0)
                 {
+                    obj.ModifiedBy = Convert.ToInt32(Session["id"]);
                     BusinessLogic.Repository.Registration.AddUpdateUser(obj);
+                    if (Convert.ToInt32(Session["id"]) == obj.UserId)
+                    {
+                        Session["name"] = (obj.FirstName != null) ? obj.FirstName.ToString() : "Guest";
+                    }
                     obj.isSuccess = true;
                     obj.ErrorMessage = "Your profile has been Updated.";
                     GetDropDownData(obj);

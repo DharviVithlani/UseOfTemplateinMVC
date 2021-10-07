@@ -26,5 +26,9 @@ namespace DataAccess
         public Nullable<int> StateId { get; set; }
         public Nullable<int> CityId { get; set; }
         public Nullable<int> ZipCode { get; set; }
+        public string ProfileImage { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
     }
 }
