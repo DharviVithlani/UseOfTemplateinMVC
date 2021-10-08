@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -245,6 +246,7 @@
     <Content Include="Views\Registration\GetCityList.cshtml" />
     <Content Include="Views\Members\Members.cshtml" />
     <Content Include="Views\Upload\_Upload.cshtml" />
+    <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,7 +46,7 @@
 
     function OnSuccess(file) {
         $("#modal-default").modal("hide");
-        $('#userimage').attr("src", "/Images/ProfileImages/" + file);
+        $('#userimage,#userprofilepicture').attr("src", "/Images/ProfileImages/" + file);
     }
 
     function uploadmessage() {

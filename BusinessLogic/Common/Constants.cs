@@ -12,5 +12,7 @@ namespace BusinessLogic.Common
         public const string incorrectPasswordMessage = "Password is Incorrect.";
         public const string DefaultUserImage ="Default.jpg";
         public const string ImagePath = "~/Images/ProfileImages";
+        public const string CurrentPasswordIncorrectMessage = "Current Password is Incorrect.";
+        public const string UpdatePasswordMessage = "Password Updated Successfully.";
     }
 }

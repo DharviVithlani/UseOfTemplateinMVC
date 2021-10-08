@@ -22,11 +22,37 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    @Html.ActionLink("My Profile", "Registration", "Registration", new { id = Session["id"] }, null)
-                </li>
-                <li class="nav-item">
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Html.ActionLink("Logout", "Logout", "Login")
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <div class="image">
+                            <img src="~/Images/ProfileImages/@Session["image"]" id="userprofilepicture" class="img-circle elevation-2 cursor-pointer" height="25" width="25">
+                        </div>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <div class="dropdown-divider"></div>
+                        <div href="#" class="dropdown-item">
+                            <i class="fas fa-user-edit mr-2"></i>
+                            <span>
+                                @Html.ActionLink("My Profile", "Registration", "Registration", new { id = Session["id"] }, new { @class = "text-reset text-decoration-none" })
+                            </span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div href="#" class="dropdown-item">
+                            <i class="fas fa-edit mr-2"></i>
+                            <span>
+                                @Html.ActionLink("Change Password", "ChangePassword", "ChangePassword", null, new { @class = "text-reset text-decoration-none" })
+                            </span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <span>
+                                @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "text-reset text-decoration-none" })
+                            </span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                    </div>
                 </li>
             </ul>
         </nav>
