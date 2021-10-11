@@ -11,28 +11,22 @@ namespace UseOfTemplateInMVC.Controllers
 {
     public class ChangePasswordController : Controller
     {
-
-        // GET: ChangeProfile
         public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(ChangePassword changePassword)
+        public JsonResult ChangePassword(ChangePassword changePassword)
         {
             var userdetails = Registration.GetUserDetailsById(Convert.ToInt32(Session["id"]));
             if (userdetails.Password == changePassword.CurrentPassword)
             {
                 userdetails.Password = changePassword.NewPassword;
                 Registration.UpdatePassword(userdetails);
-                ViewBag.Message =new string[2] { "0", Constants.UpdatePasswordMessage };
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            else
-            {
-                ViewBag.Message =new string[2]{"1", Constants.CurrentPasswordIncorrectMessage};
-            }
-            return View();
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
 }
