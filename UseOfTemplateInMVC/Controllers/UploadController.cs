@@ -27,7 +27,7 @@ namespace UseOfTemplateInMVC.Controllers
                 {
                     string _path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(Constants.ImagePath), file.FileName);
                     file.SaveAs(_path);
-                    Registration.UpdateUser(Convert.ToInt32(Session["id"]), file.FileName);
+                    Registration.UpdateUserProfile(Convert.ToInt32(Session["id"]), file.FileName);
                     Session["image"] = file.FileName;
                 }
             }

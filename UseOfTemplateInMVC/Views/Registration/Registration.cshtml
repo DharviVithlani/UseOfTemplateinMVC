@@ -9,14 +9,36 @@ else
 }
 <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <link href="~/CSS/adminlte.min.css" rel="stylesheet" />
+@if (Session["id"]!= null)
+{
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+}
 <body class="hold-transition register-page">
     <div class="register-box">
-        <div class="register-logo">
-            <a><b>Admin</b>LTE</a>
-        </div>
+        @if (Session["id"] == null)
+        {
+            <div class="register-box">
+                <div class="login-logo">
+                    <a><b>Admin</b>LTE</a>
+                </div>
+            </div>
+        }
         <div class="card">
             <div class="card-body">
-                <p class="login-box-msg">Register</p>
                 @using (Html.BeginForm("Registration", "Registration", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -24,7 +46,7 @@ else
 
                     if (Session["id"] == null)
                     {
-
+                        <p class="login-box-msg">Register</p>
                         <div class="form-group">
                             @Html.LabelFor(model => model.UserName)
                             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UserName" } })
@@ -92,13 +114,13 @@ else
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.CountryId)
-                            @Html.DropDownListFor(model => model.CountryId,Model.countries, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.CountryId, Model.countries, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.StateId)
-                            @Html.DropDownListFor(model => model.StateId, Model.states as IEnumerable<SelectListItem> , null, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.StateId, Model.states as IEnumerable<SelectListItem>, null, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
                         </div>
 

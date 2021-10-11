@@ -113,11 +113,24 @@ namespace BusinessLogic.Repository
             }
         }
 
-        public static string UpdateUser(int id,string imagepath)
+        public static string UpdateUserProfile(int id,string imagepath)
         {
             exampleEntities db = new exampleEntities();
             var userdata = db.uspUploadProfile(id, imagepath).ToString();
             return userdata;
-        }    
+        }   
+        
+        public static User GetUserDetailsById(int id)
+        {
+            exampleEntities db = new exampleEntities();
+            var userdata = db.Users.Where(m => m.UserId == id).FirstOrDefault();
+            return userdata;
+        }
+        public static void UpdatePassword(User obj)
+        {
+            exampleEntities db = new exampleEntities();
+            db.Entry(obj).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }
