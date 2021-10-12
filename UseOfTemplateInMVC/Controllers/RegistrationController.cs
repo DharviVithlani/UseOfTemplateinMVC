@@ -67,13 +67,13 @@ namespace UseOfTemplateInMVC.Controllers
                         if (userexists != null)
                         {
                             obj.isSuccess = false;
-                            obj.ErrorMessage = "Already exists please choose another name.";
+                            obj.ErrorMessage = "The username <b>"+ obj.UserName+"</b> is already exists. Please choose another.";
                         }
                         else
                         {
                             BusinessLogic.Repository.Registration.AddUpdateUser(obj);
                             obj.isSuccess = true;
-                            obj.ErrorMessage = obj.UserName + " has been Added.";
+                            obj.ErrorMessage = "The user <b>" + obj.UserName+ "</b> has been Added.";
                             obj.UserName = "";
                             ModelState.Clear();
                         }

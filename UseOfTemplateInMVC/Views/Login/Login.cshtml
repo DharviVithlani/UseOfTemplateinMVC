@@ -3,8 +3,7 @@
     ViewBag.Title = "Login";
     Layout = null;
 }
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
+<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" /> 
 <link href="~/CSS/adminlte.min.css" rel="stylesheet" />
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -19,17 +18,19 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="input-group mb-3">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fa fa-user"></span>
                             </div>
                         </div>
                     </div>
-                    <div>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</div>
+                    <div class="mb-3">
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -37,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</div>
+                    <div class="mb-3">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</div>
 
                     <div class="row">
                         <div class="col-12">
@@ -45,16 +46,19 @@
                                 <input type="submit" value="Login" class="btn btn-primary btn-block" />
                             </div>
                         </div>
-                    </div><br />
-
-                    <div class="text-danger">
-                        @ViewBag.invalidMessage
-                    </div><br />
-
-                    <div class="text-center">
-                        @Html.ActionLink("New User? Registration Here...", "NewRegistration", "Registration")
                     </div>
                 }
+                <span class="text-danger">
+                    @ViewBag.invalidMessage
+                </span>
+                <p class="mb-1">
+                    @Html.ActionLink("I forgot my password", "ForgotPassword", "ForgotPassword")
+                </p>
+
+                <p class="mb-0">
+                    @Html.ActionLink("Register a new membership", "NewRegistration", "Registration")
+                </p>
+
             </div>
         </div>
     </div>
