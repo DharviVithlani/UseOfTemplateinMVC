@@ -9,7 +9,7 @@ else
 }
 <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <link href="~/CSS/adminlte.min.css" rel="stylesheet" />
-@if (Session["id"]!= null)
+@if (Session["id"] != null)
 {
     <section class="content-header">
         <div class="container-fluid">
@@ -38,7 +38,7 @@ else
             </div>
         }
         <div class="card">
-            <div class="card-body">
+            <div class="card-body register-card-body">
                 @using (Html.BeginForm("Registration", "Registration", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -47,21 +47,43 @@ else
                     if (Session["id"] == null)
                     {
                         <p class="login-box-msg">Register</p>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.UserName)
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UserName" } })
+                        <div class="mb-2">
+                            <span>Please enter your Email Address as your Username.</span>
+                        </div>
+
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Password)
-                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Enter Password" })
+                        <div class="input-group">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ConfirmPassword)
-                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Enter Confirm Password" })
+                        <div class="input-group">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
 
@@ -71,23 +93,23 @@ else
                         @Html.HiddenFor(model => model.UserId)
                         <div class="form-group">
                             @Html.LabelFor(model => model.FirstName)
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter FirstName" } })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "FirstName" } })
                             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.LastName)
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter LastName" } })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "LastName" } })
                             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.UserName)
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UserName", @readonly = "readonly" } })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", @readonly = "readonly" } })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.DOB)
-                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter DOB" } })
+                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "DOB" } })
                             @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                         </div>
 
@@ -108,7 +130,7 @@ else
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Address)
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Address" } })
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
                             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                         </div>
 
@@ -127,13 +149,12 @@ else
                         <div class="form-group">
                             @Html.LabelFor(model => model.CityId)
                             @Html.DropDownListFor(model => model.CityId, Model.cities as IEnumerable<SelectListItem>, null, new { @class = "form-control" })
-
                             @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.ZipCode)
-                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ZipCode" } })
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "ZipCode" } })
                             @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                         </div>
                     }
@@ -144,20 +165,21 @@ else
                                 <input type="submit" value="@(Session["id"] != null ? "Update" : "Register")" class="btn btn-primary btn-block" />
                             </div>
                         </div>
-                    </div><br />
-                }
-                @if (Session["id"] == null)
-                {
-                    <div class="text-center">
-                        @Html.ActionLink("Login", "Login", "Login")
                     </div>
                 }
 
                 @if (Model != null)
                 {
                     <div class="@(Model.isSuccess == true ? "text-success" : "text-danger")">
-                        <h6 id="msg"><b>@Model.ErrorMessage</b></h6>
-                    </div><br />
+                        <span id="msg" class="mb-1">@Html.Raw(Model.ErrorMessage)</span>
+                    </div>
+                }
+
+                @if (Session["id"] == null)
+                {
+                    <span>
+                        @Html.ActionLink("I already have a membership", "Login", "Login")
+                    </span>
                 }
             </div>
         </div>

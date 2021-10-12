@@ -8,9 +8,14 @@ namespace BusinessLogic.Common
 {
     public class Constants
     {
-        public const string IncorrectNameMessage = "Name is Incorrect.";
+        public const string IncorrectNameMessage = "Username is Incorrect.";
         public const string incorrectPasswordMessage = "Password is Incorrect.";
         public const string DefaultUserImage ="Default.jpg";
         public const string ImagePath = "~/Images/ProfileImages";
+        public const string SmtpClient = "smtp.gmail.com";
+        public const string SmtpUserName = "tbs.dharvi@gmail.com";
+        public const string SmtpPassword = "Dharvi@01234";
+        public const string SmtpSystemUserName = "system@adminlte.com";
+        public const string SmtpMailSubject = "Your AdminLTE Password";
     }
 }

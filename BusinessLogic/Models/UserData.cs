@@ -12,11 +12,11 @@ namespace BusinessLogic.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "UserName is required field.")]
+        [Required(ErrorMessage = "Username is required.")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is required field.")]
+        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -45,7 +45,7 @@ namespace BusinessLogic.Models
 
         //Extra columns
 
-        [Required(ErrorMessage = "ConfirmPassword is required field.")]
+        [Required(ErrorMessage = "Confirm Password is required.")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and Confirm password do not match.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }

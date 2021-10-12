@@ -15,8 +15,8 @@ namespace BusinessLogic.Repository
             exampleEntities db = new exampleEntities();
             var editrow = db.uspGetUserByUserName(name).FirstOrDefault();
             return editrow;
-
         }
+
         public static UserData GetUserById(int id)
         {
             exampleEntities db = new exampleEntities();
@@ -95,10 +95,10 @@ namespace BusinessLogic.Repository
             return citylist;
         }
 
-        public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search,string searchby, string searchtype)
+        public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search, string searchby, string searchtype)
         {
             exampleEntities db = new exampleEntities();
-            var memberdata = db.uspGetAllMembers(search,searchby, searchtype).ToList();
+            var memberdata = db.uspGetAllMembers(search, searchby, searchtype).ToList();
             return memberdata;
         }
 
@@ -113,13 +113,13 @@ namespace BusinessLogic.Repository
             }
         }
 
-        public static string UpdateUserProfile(int id,string imagepath)
+        public static string UpdateUserProfile(int id, string imagepath)
         {
             exampleEntities db = new exampleEntities();
             var userdata = db.uspUploadProfile(id, imagepath).ToString();
             return userdata;
-        }   
-        
+        }
+
         public static User GetUserDetailsById(int id)
         {
             exampleEntities db = new exampleEntities();
