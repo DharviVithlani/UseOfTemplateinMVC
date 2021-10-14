@@ -22,15 +22,15 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                @using (Html.BeginForm("Members", "Members", FormMethod.Get))
+                @using (Html.BeginForm("Members", "Members", FormMethod.Get, new { @id = "formsubmit" }))
                 {
                     <div class="input-group">
                         @Html.TextBox("search", null, new { @class = "form-control form-control-lg", placeholder = "Type your keywords here", @id = "txtsearch" })
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-lg btn-default" name="command" value="Search">
+                            <button type="button" class="btn btn-lg btn-default" onclick="showLoader('search')">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <button type="submit" class="btn btn-lg btn-default" name="command" value="Close">
+                            <button type="button" class="btn btn-lg btn-default" onclick="showLoader('close')">
                                 <i class="fa fa-window-close"></i>
                             </button>
                         </div>
@@ -41,8 +41,8 @@
                     <thead>
                         <tr>
                             <th style="width: 90px">No.</th>
-                            <th style="width: 600px">@Html.ActionLink("FullName", "Members", new { search = ViewBag.Search,sortby = "FullName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
-                            <th style="width: 700px">@Html.ActionLink("UserName", "Members", new { search = ViewBag.Search,sortby = "UserName", sorttype = ViewBag.SortType ,pSortOn=ViewBag.SortBy})</th>
+                            <th style="width: 600px">@Html.ActionLink("FullName", "Members", new { search = ViewBag.Search, sortby = "FullName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
+                            <th style="width: 700px">@Html.ActionLink("UserName", "Members", new { search = ViewBag.Search, sortby = "UserName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -106,6 +106,16 @@
     </div>
 </section>
 <script type="text/javascript">
+    function showLoader(buttonType) {
+        loader.show();
+         if (buttonType == 'close') {
+            $("#txtsearch").val('');
+        }
+        setTimeout(function () {
+            $("#formsubmit").submit();
+        }, 300)
+    }
+
     var ConfirmDelete = function (userid, username) {
         $("#hiddenuserid").val(userid);
         $("#lblusername").text(username);
@@ -113,7 +123,7 @@
     }
     var DeleteUser = function () {
         var id = $("#hiddenuserid").val();
-        var search = $("#txtsearch").val(); 
+        var search = $("#txtsearch").val();
         $.ajax({
             type: "POST",
             url: "/Members/Delete",
