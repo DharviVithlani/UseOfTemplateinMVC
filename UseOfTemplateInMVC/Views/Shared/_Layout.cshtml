@@ -6,8 +6,9 @@
     <title>AdminLTE 3 | Dashboard 3</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
-    <link href="../CSS/adminlte.min.css" rel="stylesheet" />
+    <link href="/CSS/adminlte.min.css" rel="stylesheet" />
     <link href="~/CSS/default.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -95,6 +96,9 @@
             </div>
         </aside>
         <div class="content-wrapper">
+            <div class="overlay" style="display:none">
+                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+            </div>
             @RenderBody()
         </div>
         <footer class="main-footer">
@@ -110,10 +114,8 @@
             @Html.Partial("~/Views/Upload/_Upload.cshtml");
         </div>
     </div>
+    <script src="~/Scripts/Layoutpage/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/Layoutpage/adminlte.min.js"></script>
+    <script src="~/Scripts/loader.js"></script>
 </body>
 </html>
-@Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/Layoutpage/bootstrap.bundle.min.js"></script>
-<script src="~/Scripts/Uploadpage/bs-custom-file-input.min.js"></script>
-<script src="~/Scripts/Layoutpage/adminlte.min.js"></script>

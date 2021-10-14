@@ -2,13 +2,13 @@
 @if (Session["id"] == null)
 {
     Layout = null;
+    <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/CSS/adminlte.min.css" rel="stylesheet" />
 }
 else
 {
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
-<link href="~/CSS/adminlte.min.css" rel="stylesheet" />
 @if (Session["id"] != null)
 {
     <section class="content-header">
@@ -185,6 +185,10 @@ else
         </div>
     </div>
 </body>
+@if (Session["id"] == null)
+{
+    @Scripts.Render("~/bundles/jquery")
+}
 @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
     $(document).ready(function () {
