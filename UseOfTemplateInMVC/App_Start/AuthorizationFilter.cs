@@ -19,7 +19,7 @@ namespace UseOfTemplateInMVC.App_Start
             // Check for authorization  
             if (HttpContext.Current.Session["name"] == null)
             {
-                filterContext.Result = new RedirectResult("~/Login/Login");
+                filterContext.Result = new RedirectResult("~/LoginV2/LoginV2");
             }
         }
     }

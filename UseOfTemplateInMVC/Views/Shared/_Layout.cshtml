@@ -8,6 +8,7 @@
     <link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="/CSS/adminlte.min.css" rel="stylesheet" />
     <link href="~/CSS/default.css" rel="stylesheet" />
+    <link href="~/CSS/toastr.min.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body class="hold-transition sidebar-mini">
@@ -49,7 +50,7 @@
                         <div href="#" class="dropdown-item">
                             <i class="fas fa-sign-out-alt mr-2"></i>
                             <span>
-                                @Html.ActionLink("Logout", "Logout", "Login", null, new { @class = "text-reset text-decoration-none" })
+                                @Html.ActionLink("Logout", "Logout", "LoginV2", null, new { @class = "text-reset text-decoration-none" })
                             </span>
                         </div>
                         <div class="dropdown-divider"></div>
@@ -117,5 +118,6 @@
     <script src="~/Scripts/Layoutpage/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/Layoutpage/adminlte.min.js"></script>
     <script src="~/Scripts/loader.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
 </body>
 </html>

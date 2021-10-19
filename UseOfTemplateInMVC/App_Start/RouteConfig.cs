@@ -15,7 +15,7 @@ namespace UseOfTemplateInMVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "LoginV2", action = "LoginV2", id = UrlParameter.Optional }
             );
         }
     }

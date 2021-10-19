@@ -3,7 +3,7 @@
     ViewBag.Title = "Login";
     Layout = null;
 }
-<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" /> 
+<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <link href="~/CSS/adminlte.min.css" rel="stylesheet" />
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -40,12 +40,8 @@
                     </div>
                     <div class="mb-3">@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="text-center">
-                                <input type="submit" value="Login" class="btn btn-primary btn-block" />
-                            </div>
-                        </div>
+                    <div>
+                        <input type="submit" value="Login" class="btn btn-primary btn-block" />
                     </div>
                 }
                 <span class="text-danger">
