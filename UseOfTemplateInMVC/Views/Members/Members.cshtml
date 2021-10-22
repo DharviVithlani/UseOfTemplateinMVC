@@ -21,7 +21,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body responsive">
                 @using (Html.BeginForm("Members", "Members", FormMethod.Get, new { @id = "formsubmit" }))
                 {
                     <div class="input-group">
@@ -37,12 +37,15 @@
                     </div>
                 }
                 <br />
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 90px">No.</th>
-                            <th style="width: 600px">@Html.ActionLink("FullName", "Members", new { search = ViewBag.Search, sortby = "FullName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
-                            <th style="width: 700px">@Html.ActionLink("UserName", "Members", new { search = ViewBag.Search, sortby = "UserName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy })</th>
+                            <th>No.</th>
+                            <th>@Html.ActionLink("FullName", "Members", new { search = ViewBag.Search, sortby = "FullName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy },new { @class="text-dark"} )</th>
+                            <th>@Html.ActionLink("UserName", "Members", new { search = ViewBag.Search, sortby = "UserName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy },new { @class="text-dark"})</th>
+                            <th>@Html.ActionLink("CountryName", "Members", new { search = ViewBag.Search, sortby = "CountryName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy },new { @class="text-dark"})</th>
+                            <th>@Html.ActionLink("StateName", "Members", new { search = ViewBag.Search, sortby = "StateName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy },new { @class="text-dark"})</th>
+                            <th>@Html.ActionLink("CityName", "Members", new { search = ViewBag.Search, sortby = "CityName", sorttype = ViewBag.SortType, pSortOn = ViewBag.SortBy },new { @class="text-dark"})</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -52,25 +55,28 @@
                             int i = 1;
                             foreach (var item in Model)
                             {
-                                <tr id="row_@item.UserId">
-                                    <td>
-                                        <span>@i</span>
-                                        @{i++;
-                                        }
-                                    </td>
-                                    <td>@item.FullName</td>
-                                    <td>@item.UserName</td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                @Html.ActionLink("Edit", "Registration", "Registration", new { id = item.UserId }, new { @class = "btn btn-block btn-outline-primary" })
-                                            </div>
-                                            <div class="col-md-6">
-                                                <a href="#" class="btn btn-block btn-outline-danger" onclick='ConfirmDelete(@item.UserId,"@item.UserName")'>Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                        <tr id="row_@item.UserId">
+                            <td>
+                                <span>@i</span>
+                                @{i++;
+                                }
+                            </td>
+                            <td>@item.FullName</td>
+                            <td>@item.UserName</td>
+                            <td>@item.CountryName</td>
+                            <td>@item.StateName</td>
+                            <td>@item.CityName</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.ActionLink("Edit", "Registration", "Registration", new { id = item.UserId }, new { @class = "btn btn-block btn-outline-primary d-grid" })
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <a href="#" class="btn btn-block btn-outline-danger" onclick='ConfirmDelete(@item.UserId,"@item.UserName")'>Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                             }
                         }
                         else
@@ -108,7 +114,7 @@
 <script type="text/javascript">
     function showLoader(buttonType) {
         loader.show();
-         if (buttonType == 'close') {
+        if (buttonType == 'close') {
             $("#txtsearch").val('');
         }
         setTimeout(function () {
@@ -117,29 +123,64 @@
     }
 
     var ConfirmDelete = function (userid, username) {
-        $("#hiddenuserid").val(userid);
-        $("#lblusername").text(username);
-        $("#modal-delete").modal('show');
-    }
-    var DeleteUser = function () {
-        var id = $("#hiddenuserid").val();
-        var search = $("#txtsearch").val();
-        $.ajax({
-            type: "POST",
-            url: "/Members/Delete",
-            data: {
-                id: id,
-                search: search
-            },
-            success: function (result) {
-                $("#modal-delete").modal("hide");
-                $("#row_" + id).remove();
-                if (result == 0) {
-                    markup = "<tr><td colspan='5' class='text-center'>Records not found</td></tr>";
-                    tableBody = $("table tbody");
-                    tableBody.append(markup);
-                }
+        //$("#hiddenuserid").val(userid);
+        //$("#lblusername").text(username);
+        // $("#modal-delete").modal('show');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert " + username+"!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // var id = $("#hiddenuserid").val();
+                var search = $("#txtsearch").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Members/Delete",
+                    data: {
+                        id: userid,
+                        search: search
+                    },
+                    success: function (result) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your record has been deleted.',
+                            'success'
+                        )
+                        $("#row_" + userid).remove();
+                        if (result == 0) {
+                            markup = "<tr><td colspan='5' class='text-center'>Records not found</td></tr>";
+                            tableBody = $("table tbody");
+                            tableBody.append(markup);
+                        }
+                    }
+                })
             }
         })
     }
+    //var DeleteUser = function () {
+    //    var id = $("#hiddenuserid").val();
+    //    var search = $("#txtsearch").val();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Members/Delete",
+    //        data: {
+    //            id: id,
+    //            search: search
+    //        },
+    //        success: function (result) {
+    //            $("#modal-delete").modal("hide");
+    //            $("#row_" + id).remove();
+    //            if (result == 0) {
+    //                markup = "<tr><td colspan='5' class='text-center'>Records not found</td></tr>";
+    //                tableBody = $("table tbody");
+    //                tableBody.append(markup);
+    //            }
+    //        }
+    //    })
+    //}
 </script>

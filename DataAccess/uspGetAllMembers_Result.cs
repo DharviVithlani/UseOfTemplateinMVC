@@ -16,5 +16,8 @@ namespace DataAccess
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
+        public string CountryName { get; set; }
+        public string StateName { get; set; }
+        public string CityName { get; set; }
     }
 }
