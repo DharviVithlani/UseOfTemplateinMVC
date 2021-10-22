@@ -22,11 +22,18 @@ namespace UseOfTemplateInMVC.Controllers
             var userdetails = Registration.GetUserDetailsById(Convert.ToInt32(Session["id"]));
             if (userdetails.Password == changePassword.CurrentPassword)
             {
-                userdetails.Password = changePassword.NewPassword;
-                Registration.UpdatePassword(userdetails);
-                return Json(true, JsonRequestBehavior.AllowGet);
+                if (userdetails.Password == changePassword.NewPassword)
+                {
+                    return Json(new { success = false, displayMethod = "warning" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    userdetails.Password = changePassword.NewPassword;
+                    Registration.UpdatePassword(userdetails);
+                    return Json(new { success = true, displayMethod = "success" }, JsonRequestBehavior.AllowGet);
+                }
             }
-            return Json(false, JsonRequestBehavior.AllowGet);
+            return Json(new { success = false, displayMethod = "error" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
