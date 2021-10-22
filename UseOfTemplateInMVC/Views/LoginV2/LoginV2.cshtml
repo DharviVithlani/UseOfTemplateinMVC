@@ -56,7 +56,7 @@
                         password: password
                     },
                     success: function (data) {
-                        if (!data.isValid) {
+                        if (!data.success) {
                             toastr.error(data.errorMessage)
                         }
                         else {

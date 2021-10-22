@@ -1,4 +1,5 @@
-﻿@using (Ajax.BeginForm("Upload", "Upload", null, new AjaxOptions { OnSuccess = "OnSuccess", OnBegin = "OnBegin" }, new { enctype = "multipart/form-data" }))
+﻿<link href="~/CSS/sweetalert2.min.css" rel="stylesheet" />
+@using (Ajax.BeginForm("Upload", "Upload", null, new AjaxOptions { OnSuccess = "OnSuccess", OnBegin = "OnBegin" }, new { enctype = "multipart/form-data" }))
 {
     <div class="modal-content">
         <div class="modal-header">
@@ -11,8 +12,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="ProfileImage" name="file" onchange="uploadmessage()">
-                        <label for="ProfileImage" class="custom-file-label">Choose File</label>
+                        <input type="file" class="custom-file-input" id="ProfileImage" name="file" onchange="uploadImage()">
+                        <label for="ProfileImage" class="custom-file-label" id="lblImageName">Choose File</label>
                     </div>
                 </div>
             </div>
@@ -25,31 +26,51 @@
     </div>
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/sweetalert2.min.js"></script>
 <script src="~/Scripts/Uploadpage/bs-custom-file-input.min.js"></script>
 <script type="text/javascript">
     $(function () {
         bsCustomFileInput.init();
-
         //bind event
         //$('#ProfileImage').on('change', function () {
         //   uploadmessage();
         //});
     });
-
+    var isFileValid = false;
     function OnBegin() {
         var imagename = $("#ProfileImage").val();
         if (imagename == "") {
-            $("#message").text("Please choose an Image.");
+            $('#message').text("Please choose an Image.");
             return false;
+        }
+        return isFileValid;
+    }
+
+    function OnSuccess(imagename) {
+        Swal.fire(
+            'Great!',
+            'Your Profile has been updated successfully!',
+            'success'
+        )
+        $("#modal-default").modal("hide");
+        $('#userimage,#userprofilepicture').attr("src", "/Images/ProfileImages/" + imagename);
+    }
+
+    function uploadImage() {
+        var ext = $("#ProfileImage").val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            isFileValid = false;
+            $('#message').text("file format is incorrect.");
+        }
+        else {
+            isFileValid = true;
+            $("#message").text("");
         }
     }
 
-    function OnSuccess(file) {
-        $("#modal-default").modal("hide");
-        $('#userimage,#userprofilepicture').attr("src", "/Images/ProfileImages/" + file);
-    }
-
-    function uploadmessage() {
-        $("#message").text("");
-    }
+    $("#modal-default").on('show.bs.modal', function () {
+        $('#message').text("");
+        $("#ProfileImage").val('');
+        $('#lblImageName').text('Choose File');
+    });
 </script>
