@@ -11,13 +11,13 @@ namespace DataAccess
 {
     using System;
     
-    public partial class uspGetUserByUserName_Result
+    public partial class uspGetAllUsers_Result
     {
         public int UserId { get; set; }
-        public string FirstName { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
-        public string ProfileImage { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public string CountryName { get; set; }
+        public string StateName { get; set; }
+        public string CityName { get; set; }
     }
 }

@@ -86,7 +86,6 @@ else
                         <div class="mb-3">
                             @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
-
                     }
                     else
                     {
@@ -157,8 +156,17 @@ else
                             @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "ZipCode" } })
                             @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                         </div>
+                        if (Convert.ToInt32(Session["id"]) != Model.UserId)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsActive)
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    @Html.CheckBox("IsActive", new { @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="IsActive"></label>
+                                </div>
+                            </div>
+                        }
                     }
-
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center">

@@ -43,6 +43,9 @@ namespace BusinessLogic.Models
 
         public int ModifiedBy { get; set; }
 
+        [DisplayName("Status")]
+        public Nullable<bool> IsActive { get; set; }
+
         //Extra columns
 
         [Required(ErrorMessage = "Confirm Password is required.")]

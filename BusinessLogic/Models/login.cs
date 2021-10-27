@@ -2,7 +2,7 @@
 
 namespace BusinessLogic.Models
 {
-  public class login
+  public class Login
     {
         public int Id { get; set; }
 
