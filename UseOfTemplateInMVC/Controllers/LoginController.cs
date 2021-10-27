@@ -15,7 +15,7 @@ namespace UseOfTemplateInMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(login obj)
+        public ActionResult Login(Login obj)
         {
             try
             {

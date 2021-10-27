@@ -70,5 +70,9 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUploadProfile", idParameter, imagepathParameter);
         }
+        public virtual ObjectResult<uspGetAllUsers_Result> uspGetAllUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllUsers_Result>("uspGetAllUsers");
+        }
     }
 }

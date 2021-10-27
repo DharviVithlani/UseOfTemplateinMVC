@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using BusinessLogic.Repository;
 namespace UseOfTemplateInMVC.Controllers
 {
     public class MembersController : Controller
     {
         // GET: Members
         public ActionResult Members(string search, string pSortOn, string sortby = "FullName", string sorttype = "asc")
-        {
+         {
             if (sorttype.Equals("desc"))
                 sorttype = "asc";
             else
@@ -19,7 +19,7 @@ namespace UseOfTemplateInMVC.Controllers
             if (!sortby.Equals(pSortOn, StringComparison.CurrentCultureIgnoreCase))
                 sorttype = "asc";
 
-            var memberdata = BusinessLogic.Repository.Registration.GetMembers(search ?? "", sortby, sorttype);
+            var memberdata = Registration.GetMembers(search ?? "", sortby, sorttype);
             ViewBag.SortType = sorttype;
             ViewBag.SortBy = sortby;
             ViewBag.Search = search;
@@ -28,8 +28,8 @@ namespace UseOfTemplateInMVC.Controllers
 
         public JsonResult Delete(int id, string search)
         {
-            BusinessLogic.Repository.Registration.DeleteRow(id);
-            var memberdata = BusinessLogic.Repository.Registration.GetMembers(search ?? "", "", "");
+            Registration.DeleteRow(id);
+            var memberdata =Registration.GetMembers(search ?? "", "", "");
             return Json(memberdata.Count(), JsonRequestBehavior.AllowGet);
         }
     }

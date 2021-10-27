@@ -37,6 +37,7 @@ namespace BusinessLogic.Repository
                 userdata.StateId = editrow.StateId;
                 userdata.CityId = editrow.CityId;
                 userdata.ZipCode = editrow.ZipCode;
+                userdata.IsActive = editrow.IsActive;
             }
             return userdata;
         }
@@ -50,6 +51,7 @@ namespace BusinessLogic.Repository
                 userdata.UserName = obj.UserName;
                 userdata.Password = obj.Password;
                 userdata.CreatedDate = DateTime.Now;
+                userdata.IsActive = true;
                 db.Users.Add(userdata);
             }
             else
@@ -68,6 +70,7 @@ namespace BusinessLogic.Repository
                     editdata.ZipCode = obj.ZipCode;
                     editdata.ModifiedDate = DateTime.Now;
                     editdata.ModifiedBy = obj.ModifiedBy;
+                    editdata.IsActive = obj.IsActive;
                     db.Entry(editdata).State = EntityState.Modified;
                 }
             }
@@ -131,6 +134,12 @@ namespace BusinessLogic.Repository
             exampleEntities db = new exampleEntities();
             db.Entry(obj).State = EntityState.Modified;
             db.SaveChanges();
+        }
+        public static IEnumerable<uspGetAllUsers_Result> GetAllUsers()
+        {
+            exampleEntities db = new exampleEntities();
+            var userDetails = db.uspGetAllUsers().ToList();
+            return userDetails;
         }
     }
 }

@@ -97,6 +97,9 @@
     <Compile Include="uspGetAllMembers_Result.cs">
       <DependentUpon>UserData.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspGetAllUsers_Result.cs">
+      <DependentUpon>UserData.tt</DependentUpon>
+    </Compile>
     <Compile Include="uspGetUserByUserName_Result.cs">
       <DependentUpon>UserData.tt</DependentUpon>
     </Compile>
