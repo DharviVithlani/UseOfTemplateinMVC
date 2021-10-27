@@ -89,6 +89,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserData.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserData.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
