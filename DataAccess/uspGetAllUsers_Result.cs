@@ -19,5 +19,6 @@ namespace DataAccess
         public string CountryName { get; set; }
         public string StateName { get; set; }
         public string CityName { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

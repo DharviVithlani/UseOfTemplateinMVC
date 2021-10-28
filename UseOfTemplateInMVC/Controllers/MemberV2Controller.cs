@@ -18,7 +18,7 @@ namespace UseOfTemplateInMVC.Controllers
         public JsonResult GetData()
         {
             var userdetails = Registration.GetAllUsers();
-            return Json(new { data = userdetails }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = userdetails}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete(int id)
         {

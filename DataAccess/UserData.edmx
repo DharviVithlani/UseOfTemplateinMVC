@@ -228,6 +228,7 @@
           <Property Type="String" Name="CountryName" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="StateName" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="CityName" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -318,6 +319,7 @@
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

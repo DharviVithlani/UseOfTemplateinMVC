@@ -183,8 +183,10 @@
     <Content Include="Global.asax" />
     <Content Include="Images\AdminLTELogo.png" />
     <Content Include="Images\user2-160x160.jpg" />
+    <Content Include="Scripts\ChangePassword\changepassword.js" />
+    <Content Include="Scripts\Forgotpassword\forgotpassword.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
-    <Content Include="Scripts\Layoutpage\adminlte.min.js" />
+    <Content Include="Scripts\Layout\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />
@@ -209,7 +211,7 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\Layoutpage\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\Layout\bootstrap.bundle.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -226,7 +228,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\loader.js" />
+    <Content Include="Scripts\LoginV2\loginV2.js" />
+    <Content Include="Scripts\Members\members.js" />
+    <Content Include="Scripts\MemberV2\memberV2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Registration\registration.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -234,7 +240,8 @@
     <Content Include="Scripts\script-custom-validator.js" />
     <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Scripts\Uploadpage\bs-custom-file-input.min.js" />
+    <Content Include="Scripts\Upload\bs-custom-file-input.min.js" />
+    <Content Include="Scripts\Upload\uploadImage.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
