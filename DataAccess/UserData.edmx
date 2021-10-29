@@ -49,6 +49,10 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="LastLoginTimeStamp" Type="datetime" />
+          <Property Name="LastLoginAttempt" Type="datetime" />
+          <Property Name="LoginFailedCount" Type="int" />
+          <Property Name="LastPasswordChanged" Type="datetime" />
         </EntityType>
         <Association Name="FK__City__StateId__36B12243">
           <End Role="State" Type="Self.State" Multiplicity="0..1" />
@@ -129,8 +133,8 @@
             <Parameter Name="sortby" Mode="In" Type="String" />
             <Parameter Name="sorttype" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Users" EntityType="exampleModel.User" />
           <FunctionImport Name="uspGetAllUsers" ReturnType="Collection(exampleModel.uspGetAllUsers_Result)" />
+          <EntitySet Name="Users" EntityType="exampleModel.User" />
         </EntityContainer>
         <ComplexType Name="uspGetUserByUserName_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
@@ -139,7 +143,8 @@
           <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ProfileImage" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="IsActive" Nullable="true" />
-        </ComplexType>
+          <Property Type="DateTime" Name="LastLoginTimeStamp" Nullable="true" Precision="23" />
+          </ComplexType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityId" />
@@ -199,6 +204,15 @@
           <Property Type="String" Name="StateName" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="CityName" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="uspGetAllUsers_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+        </ComplexType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -220,16 +234,11 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LastLoginTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="LastLoginAttempt" Type="DateTime" Precision="3" />
+          <Property Name="LoginFailedCount" Type="Int32" />
+          <Property Name="LastPasswordChanged" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="uspGetAllUsers_Result">
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="FullName" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="StateName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="CityName" Nullable="true" MaxLength="30" />
-          <Property Type="Boolean" Name="IsActive" Nullable="true" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -245,7 +254,8 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="LastLoginTimeStamp" ColumnName="LastLoginTimeStamp" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="Cities">
@@ -287,9 +297,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetAllUsers" FunctionName="exampleModel.Store.uspGetAllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="exampleModel.uspGetAllUsers_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="exampleModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="LastPasswordChanged" ColumnName="LastPasswordChanged" />
+                <ScalarProperty Name="LoginFailedCount" ColumnName="LoginFailedCount" />
+                <ScalarProperty Name="LastLoginAttempt" ColumnName="LastLoginAttempt" />
+                <ScalarProperty Name="LastLoginTimeStamp" ColumnName="LastLoginTimeStamp" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -310,19 +337,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspGetAllUsers" FunctionName="exampleModel.Store.uspGetAllUsers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="exampleModel.uspGetAllUsers_Result">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

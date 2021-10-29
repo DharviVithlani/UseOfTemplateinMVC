@@ -16,8 +16,14 @@
                     }
                     else {
                         toastr.success("Logged In Successfully.")
+                        var id = data.id;
                         setTimeout(function () {
-                            var url = "/Home/Index";
+                            if (data.id != 0) {
+                                var url = `/Registration/Registration/${id}`;
+                            }
+                            else {
+                                var url = "/Home/Index";
+                            }
                             window.location.replace(url);
                         }, 1000)
                     }

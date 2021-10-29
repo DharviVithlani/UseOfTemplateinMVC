@@ -31,5 +31,9 @@ namespace DataAccess
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> LastLoginTimeStamp { get; set; }
+        public Nullable<System.DateTime> LastLoginAttempt { get; set; }
+        public Nullable<int> LoginFailedCount { get; set; }
+        public Nullable<System.DateTime> LastPasswordChanged { get; set; }
     }
 }
