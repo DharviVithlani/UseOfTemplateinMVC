@@ -132,6 +132,7 @@ namespace BusinessLogic.Repository
         public static void UpdatePassword(User obj)
         {
             exampleEntities db = new exampleEntities();
+            obj.LastPasswordChanged = DateTime.Now;
             db.Entry(obj).State = EntityState.Modified;
             db.SaveChanges();
         }
@@ -140,6 +141,26 @@ namespace BusinessLogic.Repository
             exampleEntities db = new exampleEntities();
             var userDetails = db.uspGetAllUsers().ToList();
             return userDetails;
+        }
+
+        public static void AddLastLoginTimeStamp(int id, bool success)
+        {
+            exampleEntities db = new exampleEntities();
+            var userdetails = db.Users.Where(m => m.UserId == id).FirstOrDefault();
+            if (success == false)
+            {
+                userdetails.LastLoginAttempt = DateTime.Now;
+                userdetails.LoginFailedCount = userdetails.LoginFailedCount == null ? 0 : userdetails.LoginFailedCount;
+                //userdetails.LoginFailedCount = (userdetails.LoginFailedCount == null ? 0 : userdetails.LoginFailedCount) + 1;
+                userdetails.LoginFailedCount++;
+            }
+            else
+            {
+                userdetails.LastLoginTimeStamp = DateTime.Now;
+                userdetails.LoginFailedCount = 0;
+            }
+            db.Entry(userdetails).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

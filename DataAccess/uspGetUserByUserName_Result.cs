@@ -19,5 +19,6 @@ namespace DataAccess
         public string Password { get; set; }
         public string ProfileImage { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<System.DateTime> LastLoginTimeStamp { get; set; }
     }
 }
