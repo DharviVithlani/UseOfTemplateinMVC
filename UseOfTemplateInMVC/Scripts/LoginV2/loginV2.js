@@ -12,7 +12,12 @@
                 },
                 success: function (data) {
                     if (!data.success) {
-                        toastr.error(data.errorMessage)
+                        if (!data.IsBlocked) {
+                            toastr.error(data.errorMessage)
+                        }
+                        else {
+                            toastr.warning('Your account has been disabled temporarily for 24 hour, please contact customer support.')
+                        }
                     }
                     else {
                         toastr.success("Logged In Successfully.")

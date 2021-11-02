@@ -16,6 +16,8 @@ namespace BusinessLogic.Common
         public const string SmtpUserName = "tbs.dharvi@gmail.com";
         public const string SmtpPassword = "Dharvi@01234";
         public const string SmtpSystemUserName = "system@adminlte.com";
-        public const string SmtpMailSubject = "Your AdminLTE Password";
+        public const string SmtpForgorPasswordSubject = "Your AdminLTE Password";
+        public const string SmtpLoginAttemptSubject = "LoginAttempt warning.";
+        public const int BlockedHours = 24;
     }
 }

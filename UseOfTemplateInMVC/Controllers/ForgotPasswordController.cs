@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Repository;
 using BusinessLogic.Common;
+using BusinessLogic.Utility;
+
 namespace UseOfTemplateInMVC.Controllers
 {
     public class ForgotPasswordController : Controller
@@ -24,23 +26,10 @@ namespace UseOfTemplateInMVC.Controllers
             var userName = Registration.GetUserByUserName(username);
             if (userName != null)
             {
-                var smtpClient = new SmtpClient(Constants.SmtpClient)
-                {
-                    Port = 587,
-                    Credentials = new NetworkCredential(Constants.SmtpUserName, Constants.SmtpPassword),
-                    EnableSsl = true,
-                };
-                var mailMessage = new MailMessage
-                {
-                    From = new MailAddress(Constants.SmtpSystemUserName),
-                    Subject = Constants.SmtpMailSubject,
-                    Body = "Your Password is :" + userName.Password + "<br>Thank You.",
-                    IsBodyHtml = true,
-                };
-                mailMessage.To.Add(userName.UserName);
-                smtpClient.Send(mailMessage);
+                string mailBody = "Your Password is :" + userName.Password + "<br>Thank You.";
+                EmailSender.SendEmail(username, Constants.SmtpForgorPasswordSubject, mailBody);
                 return Json(true, JsonRequestBehavior.AllowGet);
-            }
+            };
             return Json(false, JsonRequestBehavior.AllowGet);
         }
     }

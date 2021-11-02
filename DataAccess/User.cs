@@ -35,5 +35,6 @@ namespace DataAccess
         public Nullable<System.DateTime> LastLoginAttempt { get; set; }
         public Nullable<int> LoginFailedCount { get; set; }
         public Nullable<System.DateTime> LastPasswordChanged { get; set; }
+        public Nullable<bool> IsBlock { get; set; }
     }
 }

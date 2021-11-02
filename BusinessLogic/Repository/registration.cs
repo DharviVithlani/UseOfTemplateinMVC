@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using BusinessLogic.Models;
 using System;
+using BusinessLogic.Common;
 
 namespace BusinessLogic.Repository
 {
@@ -52,6 +53,7 @@ namespace BusinessLogic.Repository
                 userdata.Password = obj.Password;
                 userdata.CreatedDate = DateTime.Now;
                 userdata.IsActive = true;
+                userdata.IsBlock = false;
                 db.Users.Add(userdata);
             }
             else
@@ -143,24 +145,47 @@ namespace BusinessLogic.Repository
             return userDetails;
         }
 
-        public static void AddLastLoginTimeStamp(int id, bool success)
+        public static User AddLastLoginTimeStamp(int id, bool success)
         {
             exampleEntities db = new exampleEntities();
             var userdetails = db.Users.Where(m => m.UserId == id).FirstOrDefault();
             if (success == false)
             {
-                userdetails.LastLoginAttempt = DateTime.Now;
                 userdetails.LoginFailedCount = userdetails.LoginFailedCount == null ? 0 : userdetails.LoginFailedCount;
-                //userdetails.LoginFailedCount = (userdetails.LoginFailedCount == null ? 0 : userdetails.LoginFailedCount) + 1;
                 userdetails.LoginFailedCount++;
+                if (userdetails.LoginFailedCount < 6)
+                {
+                    userdetails.LastLoginAttempt = DateTime.Now;
+                }
+                else
+                {
+                    userdetails.IsBlock = true;
+                    DateTime currentTime = Convert.ToDateTime(userdetails.LastLoginAttempt);
+                    DateTime blockedTime = currentTime.AddHours(Constants.BlockedHours);
+                    if (blockedTime <= DateTime.Now)
+                    {
+                        userdetails.LastLoginAttempt = DateTime.Now;
+                        userdetails.LoginFailedCount = 0;
+                    }
+                }
             }
             else
             {
-                userdetails.LastLoginTimeStamp = DateTime.Now;
-                userdetails.LoginFailedCount = 0;
+                DateTime currentTime = Convert.ToDateTime(userdetails.LastLoginAttempt);
+                DateTime blockedTime = currentTime.AddHours(Constants.BlockedHours);
+                if (blockedTime <= DateTime.Now)
+                {
+                    userdetails.IsBlock = false;
+                }
+                if (userdetails.IsBlock != true)
+                {
+                    userdetails.LastLoginTimeStamp = DateTime.Now;
+                    userdetails.LoginFailedCount = 0;
+                }
             }
             db.Entry(userdetails).State = EntityState.Modified;
             db.SaveChanges();
+            return userdetails;
         }
     }
 }
