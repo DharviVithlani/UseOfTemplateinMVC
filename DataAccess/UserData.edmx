@@ -53,6 +53,7 @@
           <Property Name="LastLoginAttempt" Type="datetime" />
           <Property Name="LoginFailedCount" Type="int" />
           <Property Name="LastPasswordChanged" Type="datetime" />
+          <Property Name="IsBlock" Type="bit" />
         </EntityType>
         <Association Name="FK__City__StateId__36B12243">
           <End Role="State" Type="Self.State" Multiplicity="0..1" />
@@ -238,6 +239,7 @@
           <Property Name="LastLoginAttempt" Type="DateTime" Precision="3" />
           <Property Name="LoginFailedCount" Type="Int32" />
           <Property Name="LastPasswordChanged" Type="DateTime" Precision="3" />
+          <Property Name="IsBlock" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -313,6 +315,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="exampleModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
                 <ScalarProperty Name="LastPasswordChanged" ColumnName="LastPasswordChanged" />
                 <ScalarProperty Name="LoginFailedCount" ColumnName="LoginFailedCount" />
                 <ScalarProperty Name="LastLoginAttempt" ColumnName="LastLoginAttempt" />
