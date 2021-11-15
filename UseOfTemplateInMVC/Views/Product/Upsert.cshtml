@@ -1,0 +1,93 @@
+﻿@model BusinessLogic.Models.ProductData
+@{
+    ViewBag.Title = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //string title = "Create Product";
+}
+@Html.Partial("~/Views/Shared/_breadcrumb.cshtml", "Upsert")
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body responsive">
+                @*<h4 class="login-box-msg">
+                        @if (Model.ProductId != 0)
+                        {
+                            title = "Edit Product";
+                        }
+                        @title
+                    </h4>*@
+                <h4 class="login-box-msg">@(Model.ProductId == 0 ? "Create Product" : "Edit Product")</h4>
+                @using (Html.BeginForm("Upsert", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                @Html.LabelFor(model => model.Title)
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="input-group">
+                                @Html.LabelFor(model => model.Description)
+                                <div class="input-group">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="input-group">
+                                @Html.LabelFor(model => model.Price)
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="input-group">
+                                @Html.LabelFor(model => model.ProductImage)
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="ProductImage" name="file">
+                                        <label for="ProductImage" class="custom-file-label" id="lblImageName">Choose File</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model.ProductId > 0)
+                            {
+                                <div class="mb-3 float-right">
+                                    <img src="@Model.ProductImage" height="300" width="300" />
+                                </div>
+                            }
+                        </div>
+                        @if (Model.ProductId == 0)
+                        {
+                            <input type="submit" value="Create" class="btn btn-info mt-3" id="btnAddProduct" />
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(model => model.ProductId)
+                            <input type="submit" value="Update" class="btn btn-info mt-3" />
+                        }
+                        <a href="/Product/Index" class="btn btn-success ml-4 mt-3">Back To List</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/Upload/bs-custom-file-input.min.js"></script>
+<script src="~/Scripts/Product/upsert.js"></script>
+
+
+

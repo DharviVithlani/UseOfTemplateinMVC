@@ -22,7 +22,7 @@ function OnSuccess(imagename) {
         'success'
     )
     $("#modal-default").modal("hide");
-    $('#userimage,#userprofilepicture').attr("src", "/Images/ProfileImages/" + imagename);
+    $('#userimage,#userprofilepicture').attr("src", imagename);
 }
 
 function uploadImage() {

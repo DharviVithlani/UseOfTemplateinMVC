@@ -10,8 +10,9 @@ namespace BusinessLogic.Common
     {
         public const string IncorrectNameMessage = "Username is Incorrect.";
         public const string incorrectPasswordMessage = "Password is Incorrect.";
-        public const string DefaultUserImage ="Default.jpg";
-        public const string ImagePath = "~/Images/ProfileImages";
+        public const string DefaultUserImage = "/Images/Profile/Default.png";
+        public const string profileImagePath = "/Images/Profile/";
+        public const string productImagePath = "/Images/Product/";
         public const string SmtpClient = "smtp.gmail.com";
         public const string SmtpUserName = "tbs.dharvi@gmail.com";
         public const string SmtpPassword = "Dharvi@01234";

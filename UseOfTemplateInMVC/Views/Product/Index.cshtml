@@ -1,21 +1,21 @@
 ﻿@{
-    ViewBag.Title = "MemberV2";
+    ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-@Html.Partial("~/Views/Shared/_breadcrumb.cshtml", "MemberV2")
+@Html.Partial("~/Views/Shared/_breadcrumb.cshtml", "Product")
 <section class="content">
     <div class="container-fluid">
         <div class="card">
             <div class="card-body responsive">
-                <table class="table table-bordered" id="tblMembers">
+                <div>
+                    <a href="/Product/Upsert" class="btn btn-success mb-3 float-right">Create New product</a>
+                </div>
+                <table class="table table-bordered" id="tblProducts">
                     <thead>
                         <tr>
-                            <th>FullName</th>
-                            <th>UserName</th>
-                            <th>Country</th>
-                            <th>State</th>
-                            <th>City</th>
+                            <th>Title</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -25,4 +25,7 @@
     </div>
 </section>
 <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/MemberV2/memberV2.js"></script>
+<script src="~/Scripts/Product/product.js"></script>
+
+
+

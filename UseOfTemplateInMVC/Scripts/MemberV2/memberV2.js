@@ -33,7 +33,7 @@
                     $('td', nRow).css('background-color', '#F3FFF9');
                 } else {
                     $('td', nRow).css('background-color', '#FFF3F3');
-                }
+                }       
             }
         });
 });

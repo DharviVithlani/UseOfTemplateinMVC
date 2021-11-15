@@ -23,8 +23,8 @@ namespace UseOfTemplateInMVC.Controllers
         {
             try
             {
-                User user = new User();
-                var userdetails = Registration.GetUserByUserName(username);
+                DataAccess.User user = new DataAccess.User();
+                var userdetails = BusinessLogic.Repository.User.GetUserByUserName(username);
                 if (userdetails == null)
                 {
                     return Json(new
@@ -47,23 +47,25 @@ namespace UseOfTemplateInMVC.Controllers
                 }
                 else if (password != userdetails.Password)
                 {
-                    user = Registration.AddLastLoginTimeStamp(userdetails.UserId, false);
-                    if (user.LoginFailedCount < 6)
+                    user = BusinessLogic.Repository.User.AddLastLoginTimeStamp(userdetails.UserId, false);
+                    bool block = user.LoginFailedCount > 5;
+                    string blockMsg = string.Empty;
+                    if (block)
                     {
-                        string mailBody = "Your account has been disabled temporarily for 24 hour, please contact customer support.";
-                        EmailSender.SendEmail(username, Constants.SmtpLoginAttemptSubject, mailBody);
+                        blockMsg = "Your account has been disabled temporarily for 24 hour, please contact customer support.";
+                        EmailSender.SendEmail(username, Constants.SmtpLoginAttemptSubject, blockMsg);
                     }
                     return Json(new
                     {
                         success = false,
-                        errorMessage = "Password is incorrect.",
+                        errorMessage = block ? blockMsg : "Password is incorrect.",
                         id = 0,
-                        IsBlocked = user.LoginFailedCount > 5
+                        IsBlocked = block
                     }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    user = Registration.AddLastLoginTimeStamp(userdetails.UserId, true);
+                    user = BusinessLogic.Repository.User.AddLastLoginTimeStamp(userdetails.UserId, true);
                     if (user.IsBlock != true)
                     {
                         SetSession(user);
@@ -83,7 +85,7 @@ namespace UseOfTemplateInMVC.Controllers
             }
         }
 
-        void SetSession(User userdetails)
+        void SetSession(DataAccess.User userdetails)
         {
             Session["id"] = userdetails.UserId.ToString();
             Session["name"] = userdetails.FirstName != null ? userdetails.FirstName.ToString() : "Guest";

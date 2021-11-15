@@ -21,7 +21,7 @@ namespace UseOfTemplateInMVC.Controllers
             {
                 if (ModelState.IsValid == true)
                 {
-                    var userdetails = Registration.GetUserByUserName(obj.Name);
+                    var userdetails = BusinessLogic.Repository.User.GetUserByUserName(obj.Name);
                     if (userdetails == null)
                     {
                         ViewBag.invalidMessage = Constants.IncorrectNameMessage;

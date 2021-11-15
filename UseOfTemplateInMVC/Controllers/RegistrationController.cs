@@ -18,7 +18,7 @@ namespace UseOfTemplateInMVC.Controllers
         {
             try
             {
-                var model = BusinessLogic.Repository.Registration.GetUserById(id);
+                var model = BusinessLogic.Repository.User.GetUserById(id);
                 GetDropDownData(model);
                 return View(model);
             }
@@ -31,13 +31,13 @@ namespace UseOfTemplateInMVC.Controllers
 
         public ActionResult GetStateList(int CountryId)
         {
-            IEnumerable<State> statelist = BusinessLogic.Repository.Registration.GetStates(CountryId);
+            IEnumerable<State> statelist = BusinessLogic.Repository.State.GetStates(CountryId);
             return PartialView("GetStateList", statelist);
         }
 
         public ActionResult GetCityList(int StateId)
         {
-            IEnumerable<City> citylist = BusinessLogic.Repository.Registration.GetCities(StateId);
+            IEnumerable<City> citylist = BusinessLogic.Repository.City.GetCities(StateId);
             return PartialView("GetCityList", citylist);
         }
 
@@ -50,7 +50,7 @@ namespace UseOfTemplateInMVC.Controllers
                 if (obj.UserId != 0)
                 {
                     obj.ModifiedBy = Convert.ToInt32(Session["id"]);
-                    BusinessLogic.Repository.Registration.AddUpdateUser(obj);
+                    BusinessLogic.Repository.User.AddUpdateUser(obj);
                     if (Convert.ToInt32(Session["id"]) == obj.UserId)
                     {
                         Session["name"] = (obj.FirstName != null) ? obj.FirstName.ToString() : "Guest";
@@ -63,7 +63,7 @@ namespace UseOfTemplateInMVC.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var userexists = BusinessLogic.Repository.Registration.GetUserByUserName(obj.UserName);
+                        var userexists = BusinessLogic.Repository.User.GetUserByUserName(obj.UserName);
                         if (userexists != null)
                         {
                             obj.isSuccess = false;
@@ -71,7 +71,7 @@ namespace UseOfTemplateInMVC.Controllers
                         }
                         else
                         {
-                            BusinessLogic.Repository.Registration.AddUpdateUser(obj);
+                            BusinessLogic.Repository.User.AddUpdateUser(obj);
                             obj.isSuccess = true;
                             obj.ErrorMessage = "The user <b>" + obj.UserName+ "</b> has been Added.";
                             obj.UserName = "";
@@ -89,17 +89,17 @@ namespace UseOfTemplateInMVC.Controllers
         }
         public UserData GetDropDownData(UserData userData)
         {
-            var countrydata = BusinessLogic.Repository.Registration.GetCountries();
+            var countrydata = BusinessLogic.Repository.Country.GetCountries();
             List<SelectListItem> items = countrydata.Select(x => new SelectListItem { Text = x.CountryName, Value = x.CountryID.ToString() }).ToList();
             items.Insert(0, new SelectListItem { Text = "Select Country", Value = "0" });
             userData.countries = items;
 
-            var statedata = BusinessLogic.Repository.Registration.GetStates(Convert.ToInt32(userData.CountryId));
+            var statedata = BusinessLogic.Repository.State.GetStates(Convert.ToInt32(userData.CountryId));
             List<SelectListItem> statelist = statedata.Select(x => new SelectListItem { Text = x.StateName, Value = x.StateId.ToString() }).ToList();
             statelist.Insert(0, new SelectListItem { Text = "Select State", Value = "0" });
             userData.states = statelist;
 
-            var citydata = BusinessLogic.Repository.Registration.GetCities(Convert.ToInt32(userData.StateId));
+            var citydata = BusinessLogic.Repository.City.GetCities(Convert.ToInt32(userData.StateId));
             List<SelectListItem> citylist = citydata.Select(x => new SelectListItem { Text = x.CityName, Value = x.CityId.ToString() }).ToList();
             citylist.Insert(0, new SelectListItem { Text = "Select City", Value = "0" });
             userData.cities = citylist;

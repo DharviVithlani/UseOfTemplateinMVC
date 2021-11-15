@@ -11,21 +11,7 @@ else
 }
 @if (Session["id"] != null)
 {
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1>Profile</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li class="breadcrumb-item active">Profile</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
+    @Html.Partial("~/Views/Shared/_breadcrumb.cshtml", "My Profile")
 }
 <body class="hold-transition register-page">
     <div class="register-box">
@@ -37,12 +23,12 @@ else
                 </div>
             </div>
         }
-        <div class="card">
+        <div class="card">  
             <div class="card-body register-card-body">
                 @using (Html.BeginForm("Registration", "Registration", FormMethod.Post))
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     if (Session["id"] == null)
                     {
@@ -64,7 +50,7 @@ else
                         </div>
 
                         <div class="input-group">
-                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password"})
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-eye" onclick="showHidePassword(this)"></span>
@@ -76,7 +62,7 @@ else
                         </div>
 
                         <div class="input-group">
-                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password"})
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-eye" onclick="showHidePassword(this)"></span>

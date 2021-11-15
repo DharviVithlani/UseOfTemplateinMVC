@@ -137,6 +137,7 @@
     <Compile Include="Controllers\LoginV2Controller.cs" />
     <Compile Include="Controllers\MemberV2Controller.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,6 +150,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
@@ -172,10 +182,9 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.svg" />
-    <Content Include="CSS\jquery.dataTables.min.css" />
     <Content Include="CSS\sweetalert2.min.css" />
     <Content Include="CSS\toastr.min.css" />
-    <Content Include="Images\ProfileImages\Default.jpg" />
+    <Content Include="Images\Profile\Default.png" />
     <Content Include="Images\web-design-background_1300-39.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -184,8 +193,8 @@
     <Content Include="Images\AdminLTELogo.png" />
     <Content Include="Images\user2-160x160.jpg" />
     <Content Include="Scripts\ChangePassword\changepassword.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Forgotpassword\forgotpassword.js" />
-    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\Layout\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -227,11 +236,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Layout\layout.js" />
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\LoginV2\loginV2.js" />
     <Content Include="Scripts\Members\members.js" />
     <Content Include="Scripts\MemberV2\memberV2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Product\product.js" />
+    <Content Include="Scripts\Product\upsert.js" />
     <Content Include="Scripts\Registration\registration.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -268,9 +280,13 @@
     <Content Include="Views\ForgotPassword\ForgotPassword.cshtml" />
     <Content Include="Views\LoginV2\LoginV2.cshtml" />
     <Content Include="Views\MemberV2\MemberV2.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Upsert.cshtml" />
+    <Content Include="Views\Shared\_breadcrumb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

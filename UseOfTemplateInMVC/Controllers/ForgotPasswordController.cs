@@ -23,7 +23,7 @@ namespace UseOfTemplateInMVC.Controllers
         [HttpPost]
         public JsonResult ForgotPassword(string username)
         {
-            var userName = Registration.GetUserByUserName(username);
+            var userName = BusinessLogic.Repository.User.GetUserByUserName(username);
             if (userName != null)
             {
                 string mailBody = "Your Password is :" + userName.Password + "<br>Thank You.";
