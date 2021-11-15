@@ -2,40 +2,26 @@
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="content-header">
+@Html.Partial("~/Views/Shared/_breadcrumb.cshtml","Contact")
+<section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>Contact</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="breadcrumb-item active">Contact</li>
-                </ol>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <address>
+                        One Microsoft Way<br />
+                        Redmond, WA 98052-6399<br />
+                        <abbr title="Phone">P:</abbr>
+                        425.555.0100
+                    </address>
+                    <address>
+                        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                    </address>
+                </div>
             </div>
         </div>
     </div>
-</section>
-<section class="content">
-    <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <address>
-                                One Microsoft Way<br />
-                                Redmond, WA 98052-6399<br />
-                                <abbr title="Phone">P:</abbr>
-                                425.555.0100
-                            </address>
-                            <address>
-                                <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-                                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-                            </address>
-                        </div>
-                    </div>
-                </div>
-            </div>
 </section>
 
 

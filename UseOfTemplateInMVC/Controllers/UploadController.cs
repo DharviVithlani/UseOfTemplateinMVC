@@ -23,19 +23,31 @@ namespace UseOfTemplateInMVC.Controllers
         {
             try
             {
+                if (Convert.ToString(Session["image"]) != Constants.DefaultUserImage)
+                {
+                    string filePath = Server.MapPath(Convert.ToString(Session["image"]));
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
                 if (file.ContentLength > 0)
                 {
-                    string _path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(Constants.ImagePath), file.FileName);
-                    file.SaveAs(_path);
-                    Registration.UpdateUserProfile(Convert.ToInt32(Session["id"]), file.FileName);
-                    Session["image"] = file.FileName;
+                    string ImageName = string.Empty;
+                    Guid guid = Guid.NewGuid();
+                    var ext = Path.GetExtension(file.FileName);
+                    ImageName = Constants.profileImagePath + guid.ToString() + ext;
+                    var comPath = Server.MapPath(ImageName);
+                    file.SaveAs(comPath);
+                    BusinessLogic.Repository.User.UpdateUserProfile(Convert.ToInt32(Session["id"]), ImageName);
+                    Session["image"] = ImageName;
                 }
             }
             catch (Exception e)
             {
 
             }
-            return Json(file.FileName, JsonRequestBehavior.AllowGet);
+            return Json(Session["image"], JsonRequestBehavior.AllowGet);
         }
     }
 }

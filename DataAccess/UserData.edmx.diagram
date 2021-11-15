@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="exampleModel.State" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="exampleModel.FK__City__StateId__36B12243" />
         <AssociationConnector Association="exampleModel.FK__State__CountryId__35BCFE0A" />
+        <EntityTypeShape EntityType="exampleModel.Product" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="exampleModel.User" Width="1.5" PointX="0.75" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>

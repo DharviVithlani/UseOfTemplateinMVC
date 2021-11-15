@@ -19,7 +19,7 @@ namespace UseOfTemplateInMVC.Controllers
             if (!sortby.Equals(pSortOn, StringComparison.CurrentCultureIgnoreCase))
                 sorttype = "asc";
 
-            var memberdata = Registration.GetMembers(search ?? "", sortby, sorttype);
+            var memberdata = BusinessLogic.Repository.User.GetMembers(search ?? "", sortby, sorttype);
             ViewBag.SortType = sorttype;
             ViewBag.SortBy = sortby;
             ViewBag.Search = search;
@@ -28,8 +28,8 @@ namespace UseOfTemplateInMVC.Controllers
 
         public JsonResult Delete(int id, string search)
         {
-            Registration.DeleteRow(id);
-            var memberdata =Registration.GetMembers(search ?? "", "", "");
+            BusinessLogic.Repository.User.DeleteUser(id);
+            var memberdata = BusinessLogic.Repository.User.GetMembers(search ?? "", "", "");
             return Json(memberdata.Count(), JsonRequestBehavior.AllowGet);
         }
     }

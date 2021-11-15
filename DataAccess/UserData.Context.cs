@@ -30,24 +30,8 @@ namespace DataAccess
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
-    
-        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers(string searchBy, string sortby, string sorttype)
-        {
-            var searchByParameter = searchBy != null ?
-                new ObjectParameter("SearchBy", searchBy) :
-                new ObjectParameter("SearchBy", typeof(string));
-    
-            var sortbyParameter = sortby != null ?
-                new ObjectParameter("sortby", sortby) :
-                new ObjectParameter("sortby", typeof(string));
-    
-            var sorttypeParameter = sorttype != null ?
-                new ObjectParameter("sorttype", sorttype) :
-                new ObjectParameter("sorttype", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers", searchByParameter, sortbyParameter, sorttypeParameter);
-        }
     
         public virtual ObjectResult<uspGetUserByUserName_Result> uspGetUserByUserName(string userName)
         {
@@ -70,9 +54,32 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUploadProfile", idParameter, imagepathParameter);
         }
+    
+        public virtual ObjectResult<uspGetAllMembers_Result> uspGetAllMembers(string searchBy, string sortby, string sorttype)
+        {
+            var searchByParameter = searchBy != null ?
+                new ObjectParameter("SearchBy", searchBy) :
+                new ObjectParameter("SearchBy", typeof(string));
+    
+            var sortbyParameter = sortby != null ?
+                new ObjectParameter("sortby", sortby) :
+                new ObjectParameter("sortby", typeof(string));
+    
+            var sorttypeParameter = sorttype != null ?
+                new ObjectParameter("sorttype", sorttype) :
+                new ObjectParameter("sorttype", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllMembers_Result>("uspGetAllMembers", searchByParameter, sortbyParameter, sorttypeParameter);
+        }
+    
         public virtual ObjectResult<uspGetAllUsers_Result> uspGetAllUsers()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllUsers_Result>("uspGetAllUsers");
+        }
+    
+        public virtual ObjectResult<uspGetAllProducts_Result> uspGetAllProducts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetAllProducts_Result>("uspGetAllProducts");
         }
     }
 }

@@ -2,29 +2,15 @@
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="content-header">
+@Html.Partial("~/Views/Shared/_breadcrumb.cshtml","About")
+<section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>About</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="breadcrumb-item active">About</li>
-                </ol>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    About Us Page
+                </div>
             </div>
         </div>
     </div>
-</section>
-<section class="content">
-    <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            About Us Page
-                        </div>
-                    </div>
-                </div>
-            </div>
 </section>

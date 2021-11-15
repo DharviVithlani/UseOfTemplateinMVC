@@ -19,7 +19,7 @@ namespace UseOfTemplateInMVC.Controllers
         [HttpPost]
         public JsonResult ChangePassword(ChangePassword changePassword)
         {
-            var userdetails = Registration.GetUserDetailsById(Convert.ToInt32(Session["id"]));
+            var userdetails = BusinessLogic.Repository.User.GetUserDetailsById(Convert.ToInt32(Session["id"]));
             if (userdetails.Password == changePassword.CurrentPassword)
             {
                 if (userdetails.Password == changePassword.NewPassword)
@@ -29,7 +29,7 @@ namespace UseOfTemplateInMVC.Controllers
                 else
                 {
                     userdetails.Password = changePassword.NewPassword;
-                    Registration.UpdatePassword(userdetails);
+                    BusinessLogic.Repository.User.UpdatePassword(userdetails);
                     return Json(new { success = true, displayMethod = "success" }, JsonRequestBehavior.AllowGet);
                 }
             }

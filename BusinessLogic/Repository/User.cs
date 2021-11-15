@@ -1,23 +1,17 @@
-﻿using System.Linq;
-using System.Data;
-using DataAccess;
-using System.Data.Entity;
-using System.Collections.Generic;
+﻿using BusinessLogic.Common;
 using BusinessLogic.Models;
+using DataAccess;
 using System;
-using BusinessLogic.Common;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Repository
 {
-    public class Registration
+   public class User
     {
-        public static uspGetUserByUserName_Result GetUserByUserName(string name)
-        {
-            exampleEntities db = new exampleEntities();
-            var editrow = db.uspGetUserByUserName(name).FirstOrDefault();
-            return editrow;
-        }
-
         public static UserData GetUserById(int id)
         {
             exampleEntities db = new exampleEntities();
@@ -43,12 +37,18 @@ namespace BusinessLogic.Repository
             return userdata;
         }
 
+        public static uspGetUserByUserName_Result GetUserByUserName(string name)
+        {
+            exampleEntities db = new exampleEntities();
+            var editrow = db.uspGetUserByUserName(name).FirstOrDefault();
+            return editrow;
+        }
         public static void AddUpdateUser(UserData obj)
         {
             exampleEntities db = new exampleEntities();
             if (obj.UserId == 0)
             {
-                var userdata = new User();
+                var userdata = new DataAccess.User();
                 userdata.UserName = obj.UserName;
                 userdata.Password = obj.Password;
                 userdata.CreatedDate = DateTime.Now;
@@ -78,36 +78,13 @@ namespace BusinessLogic.Repository
             }
             db.SaveChanges();
         }
-
-        public static IEnumerable<Country> GetCountries()
-        {
-            exampleEntities db = new exampleEntities();
-            var countrylist = db.Countries.ToList();
-            return countrylist;
-        }
-
-        public static IEnumerable<State> GetStates(int id)
-        {
-            exampleEntities db = new exampleEntities();
-            var statelist = db.States.Where(m => m.CountryId == id).ToList();
-            return statelist;
-        }
-
-        public static IEnumerable<City> GetCities(int id)
-        {
-            exampleEntities db = new exampleEntities();
-            var citylist = db.Cities.Where(m => m.StateId == id).ToList();
-            return citylist;
-        }
-
         public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search, string searchby, string searchtype)
         {
             exampleEntities db = new exampleEntities();
             var memberdata = db.uspGetAllMembers(search, searchby, searchtype).ToList();
             return memberdata;
         }
-
-        public static void DeleteRow(int id)
+        public static void DeleteUser(int id)
         {
             exampleEntities db = new exampleEntities();
             var deleterow = db.Users.Where(m => m.UserId == id).FirstOrDefault();
@@ -117,7 +94,6 @@ namespace BusinessLogic.Repository
                 db.SaveChanges();
             }
         }
-
         public static string UpdateUserProfile(int id, string imagepath)
         {
             exampleEntities db = new exampleEntities();
@@ -125,13 +101,13 @@ namespace BusinessLogic.Repository
             return userdata;
         }
 
-        public static User GetUserDetailsById(int id)
+        public static DataAccess.User GetUserDetailsById(int id)
         {
             exampleEntities db = new exampleEntities();
             var userdata = db.Users.Where(m => m.UserId == id).FirstOrDefault();
             return userdata;
         }
-        public static void UpdatePassword(User obj)
+        public static void UpdatePassword(DataAccess.User obj)
         {
             exampleEntities db = new exampleEntities();
             obj.LastPasswordChanged = DateTime.Now;
@@ -145,7 +121,7 @@ namespace BusinessLogic.Repository
             return userDetails;
         }
 
-        public static User AddLastLoginTimeStamp(int id, bool success)
+        public static DataAccess.User AddLastLoginTimeStamp(int id, bool success)
         {
             exampleEntities db = new exampleEntities();
             var userdetails = db.Users.Where(m => m.UserId == id).FirstOrDefault();

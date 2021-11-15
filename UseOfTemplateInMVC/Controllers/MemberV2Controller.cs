@@ -17,13 +17,13 @@ namespace UseOfTemplateInMVC.Controllers
         }
         public JsonResult GetData()
         {
-            var userdetails = Registration.GetAllUsers();
+            var userdetails = BusinessLogic.Repository.User.GetAllUsers();
             return Json(new { data = userdetails}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete(int id)
         {
-            Registration.DeleteRow(id);
-            var userdetails = Registration.GetAllUsers();
+            BusinessLogic.Repository.User.DeleteUser(id);
+            var userdetails = BusinessLogic.Repository.User.GetAllUsers();
             return Json(userdetails.Count(), JsonRequestBehavior.AllowGet);
         }
     }

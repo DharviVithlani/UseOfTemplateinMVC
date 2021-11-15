@@ -6,17 +6,19 @@
             $.ajax({
                 type: "post",
                 url: "/LoginV2/LoginV2",
+                beforeSend: function () { loader.show() },
                 data: {
                     username: username,
                     password: password
                 },
                 success: function (data) {
+                    loader.hide();
                     if (!data.success) {
                         if (!data.IsBlocked) {
                             toastr.error(data.errorMessage)
                         }
                         else {
-                            toastr.warning('Your account has been disabled temporarily for 24 hour, please contact customer support.')
+                            toastr.warning(data.errorMessage)
                         }
                     }
                     else {

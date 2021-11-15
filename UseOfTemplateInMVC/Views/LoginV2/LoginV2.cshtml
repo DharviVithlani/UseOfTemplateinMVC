@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
 <link href="~/CSS/adminlte.min.css" rel="stylesheet" />
 <link href="~/CSS/toastr.min.css" rel="stylesheet" />
 <body class="hold-transition login-page">
@@ -12,6 +13,9 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card card-primary">
+                        <div class="overlay" style="display:none">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
                         <div class="card-body login-card-body">
                             <form id="quickForm">
                                 <p class="login-box-msg">Login</p>
@@ -42,3 +46,4 @@
 @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/toastr.min.js"></script>
 <script src="~/Scripts/LoginV2/loginV2.js"></script>
+<script src="~/Scripts/loader.js"></script>
