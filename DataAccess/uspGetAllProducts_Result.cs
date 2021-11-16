@@ -16,5 +16,6 @@ namespace DataAccess
         public int ProductId { get; set; }
         public string Title { get; set; }
         public Nullable<int> Price { get; set; }
+        public string ProductImage { get; set; }
     }
 }

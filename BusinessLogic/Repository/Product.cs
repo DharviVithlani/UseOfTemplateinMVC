@@ -11,7 +11,7 @@ namespace BusinessLogic.Repository
 {
     public class Product
     {
-        public static IEnumerable<uspGetAllProducts_Result> GetAllProductDetails()
+        public static IEnumerable<uspGetAllProducts_Result> GetAllProducts()
         {
             exampleEntities db = new exampleEntities();
             var productDetails = db.uspGetAllProducts().ToList();
