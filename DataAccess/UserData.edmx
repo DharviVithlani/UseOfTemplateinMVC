@@ -101,7 +101,7 @@
         </Function>
         <Function Name="uspUploadProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="imagepath" Type="varchar" Mode="In" />
+          <Parameter Name="imagepath" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="exampleModelStoreContainer">
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -232,6 +232,7 @@
           <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Price" Nullable="true" />
           <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="ProductImage" Nullable="true" />
         </ComplexType>
         <EntityType Name="Product">
           <Key>
@@ -347,6 +348,7 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

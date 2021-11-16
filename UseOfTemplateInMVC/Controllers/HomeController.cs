@@ -6,16 +6,18 @@ namespace UseOfTemplateInMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var productdata = BusinessLogic.Repository.Product.GetAllProducts();
+            return View(productdata);
         }
     }
 }
-       
 
-       
 
-      
 
-       
 
-   
+
+
+
+
+
+    

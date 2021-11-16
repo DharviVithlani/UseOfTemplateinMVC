@@ -1,15 +1,24 @@
-﻿@{
+﻿@model IEnumerable<DataAccess.uspGetAllProducts_Result>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Partial("~/Views/Shared/_breadcrumb.cshtml","Home")
+@Html.Partial("~/Views/Shared/_breadcrumb.cshtml", "Home")
 <section class="content">
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <img src="~/Images/web-design-background_1300-39.jpg" height="300" width="300" />
-                    </div>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box">
+                                <img src="@item.ProductImage" height="300" width="300" />
+                                <h4>@item.Title</h4>
+                                <p> Price: @item.Price</p>
+                                <input type="submit" value="Details" class="btn btn-info btn-block" / >
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

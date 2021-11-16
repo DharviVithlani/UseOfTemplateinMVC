@@ -11,18 +11,13 @@ namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         public int ProductId { get; set; }
-
         public string Title { get; set; }
-
         public string Description { get; set; }
-
         public Nullable<int> Price { get; set; }
-
         public string ProductImage { get; set; }
     }
 }

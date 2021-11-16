@@ -21,7 +21,7 @@ namespace UseOfTemplateInMVC.Controllers
 
         public JsonResult GetAllProductDetails()
         {
-            var productDetails = BusinessLogic.Repository.Product.GetAllProductDetails();
+            var productDetails = BusinessLogic.Repository.Product.GetAllProducts();
             return Json(new { data = productDetails }, JsonRequestBehavior.AllowGet);
         }
 
@@ -33,7 +33,7 @@ namespace UseOfTemplateInMVC.Controllers
             }
             else
             {
-                var productdetails =BusinessLogic.Repository.Product.GetProductByProductId(id);
+                var productdetails = BusinessLogic.Repository.Product.GetProductByProductId(id);
                 return View(productdetails);
             }
         }
