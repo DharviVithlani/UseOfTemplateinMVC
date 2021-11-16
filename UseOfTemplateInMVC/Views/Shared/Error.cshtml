@@ -1,13 +1,41 @@
-﻿<!DOCTYPE html>
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "NotFound";
+    Layout = null;
+}
+<link href="~/CSS/adminlte.min.css" rel="stylesheet" />
+<link href="~/CSS/default.css" rel="stylesheet" />
+<!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    <section class="content">
+        <div class="error-page not-found-404">
+            <h2 class="headline text-warning">404</h2>
+            <div class="error-content">
+                <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! <b id="path"></b> page not found.</h3>
+                <p>
+                    We could not find the page you were looking for.
+                    Meanwhile, you may
+                    @if (Session["id"] != null)
+                    {
+                        <a href="/Home/Index">return to dashboard.</a>
+                    }
+                    else
+                    {
+                        <a href="/LoginV2/LoginV2">return to Login.</a>
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        window.onload = function () {
+            var current = location.href;
+            var host = this.location.origin;
+            var querystring = current.substring(current.indexOf('=') + 1)
+            $('#path').text(host + querystring);
+        }
+    </script>
 </body>
 </html>
