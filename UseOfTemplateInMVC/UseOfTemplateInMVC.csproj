@@ -183,6 +183,7 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="CSS\icheck-bootstrap.min.css" />
     <Content Include="CSS\sweetalert2.min.css" />
     <Content Include="CSS\toastr.min.css" />
     <Content Include="Images\Profile\Default.png" />
@@ -194,6 +195,7 @@
     <Content Include="Images\AdminLTELogo.png" />
     <Content Include="Images\user2-160x160.jpg" />
     <Content Include="Scripts\ChangePassword\changepassword.js" />
+    <Content Include="Scripts\cookies.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Forgotpassword\forgotpassword.js" />
     <Content Include="Scripts\Layout\adminlte.min.js" />

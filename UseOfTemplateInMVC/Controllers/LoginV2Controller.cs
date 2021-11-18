@@ -19,7 +19,7 @@ namespace UseOfTemplateInMVC.Controllers
         }
 
         [HttpPost]
-        public JsonResult LoginV2(string username, string password)
+        public JsonResult LoginV2(string username, string password, bool rememberme)
         {
             try
             {
@@ -65,6 +65,19 @@ namespace UseOfTemplateInMVC.Controllers
                 }
                 else
                 {
+                    if (rememberme == true)
+                    {
+                        Cookies.SetCookie("username", userdetails.UserName);
+                        Cookies.SetCookie("password", userdetails.Password);
+                        Cookies.SetCookie("remember", rememberme.ToString());
+                    }
+                    else
+                    {
+                        Cookies.RemoveCookieByKey("username");
+                        Cookies.RemoveCookieByKey("password");
+                        Cookies.RemoveCookieByKey("remember");
+                    }
+
                     user = BusinessLogic.Repository.User.AddLastLoginTimeStamp(userdetails.UserId, true);
                     if (user.IsBlock != true)
                     {

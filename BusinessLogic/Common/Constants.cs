@@ -20,5 +20,6 @@ namespace BusinessLogic.Common
         public const string SmtpForgorPasswordSubject = "Your AdminLTE Password";
         public const string SmtpLoginAttemptSubject = "LoginAttempt warning.";
         public const int BlockedHours = 24;
+        public const int CookiesExpirationNoOfDays = 15;
     }
 }
