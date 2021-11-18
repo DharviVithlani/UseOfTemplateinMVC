@@ -7,10 +7,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BusinessLogic.Utility;
 namespace BusinessLogic.Repository
 {
-   public class User
+    public class User
     {
         public static UserData GetUserById(int id)
         {
@@ -50,7 +50,7 @@ namespace BusinessLogic.Repository
             {
                 var userdata = new DataAccess.User();
                 userdata.UserName = obj.UserName;
-                userdata.Password = obj.Password;
+                userdata.Password = Cryptography.Encryption(obj.Password); 
                 userdata.CreatedDate = DateTime.Now;
                 userdata.IsActive = true;
                 userdata.IsBlock = false;
