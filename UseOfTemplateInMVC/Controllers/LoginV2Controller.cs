@@ -45,7 +45,7 @@ namespace UseOfTemplateInMVC.Controllers
                         IsBlocked = false
                     }, JsonRequestBehavior.AllowGet);
                 }
-                else if (password != userdetails.Password)
+                else if (password != Cryptography.Decryption(userdetails.Password))
                 {
                     user = BusinessLogic.Repository.User.AddLastLoginTimeStamp(userdetails.UserId, false);
                     bool block = user.LoginFailedCount > 5;
@@ -108,6 +108,12 @@ namespace UseOfTemplateInMVC.Controllers
         {
             Session.Abandon();
             return View("LoginV2");
+        }
+
+        public JsonResult GetValuesFromCookies()
+        {
+            var encryptedPassword = Cookies.GetCookie("password");
+            return Json(new { username = Cookies.GetCookie("username"), password = Cryptography.Decryption(encryptedPassword), rememberMe = Cookies.GetCookie("remember") }, JsonRequestBehavior.AllowGet);
         }
     }
 }

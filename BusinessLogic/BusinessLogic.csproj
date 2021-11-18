@@ -104,6 +104,7 @@
     <Compile Include="Repository\Product.cs" />
     <Compile Include="Repository\State.cs" />
     <Compile Include="Repository\User.cs" />
+    <Compile Include="Utility\Cryptography.cs" />
     <Compile Include="Utility\EmailSender.cs" />
     <Compile Include="Utility\Cookies.cs" />
   </ItemGroup>

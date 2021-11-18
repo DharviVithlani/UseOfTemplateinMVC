@@ -7,6 +7,7 @@ using BusinessLogic.Models;
 using BusinessLogic.Repository;
 using DataAccess;
 using BusinessLogic.Common;
+using BusinessLogic.Utility;
 namespace UseOfTemplateInMVC.Controllers
 {
     public class ChangePasswordController : Controller
@@ -20,15 +21,16 @@ namespace UseOfTemplateInMVC.Controllers
         public JsonResult ChangePassword(ChangePassword changePassword)
         {
             var userdetails = BusinessLogic.Repository.User.GetUserDetailsById(Convert.ToInt32(Session["id"]));
-            if (userdetails.Password == changePassword.CurrentPassword)
+            var decryptedPassword = Cryptography.Decryption(userdetails.Password);
+            if (decryptedPassword == changePassword.CurrentPassword)
             {
-                if (userdetails.Password == changePassword.NewPassword)
+                if (decryptedPassword == changePassword.NewPassword)
                 {
                     return Json(new { success = false, displayMethod = "warning" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    userdetails.Password = changePassword.NewPassword;
+                    userdetails.Password = Cryptography.Encryption(changePassword.NewPassword);
                     BusinessLogic.Repository.User.UpdatePassword(userdetails);
                     return Json(new { success = true, displayMethod = "success" }, JsonRequestBehavior.AllowGet);
                 }

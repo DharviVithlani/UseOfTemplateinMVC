@@ -26,7 +26,7 @@ namespace UseOfTemplateInMVC.Controllers
             var userName = BusinessLogic.Repository.User.GetUserByUserName(username);
             if (userName != null)
             {
-                string mailBody = "Your Password is :" + userName.Password + "<br>Thank You.";
+                string mailBody = "Your Password is :" + Cryptography.Decryption(userName.Password) + "<br>Thank You.";
                 EmailSender.SendEmail(username, Constants.SmtpForgorPasswordSubject, mailBody);
                 return Json(true, JsonRequestBehavior.AllowGet);
             };

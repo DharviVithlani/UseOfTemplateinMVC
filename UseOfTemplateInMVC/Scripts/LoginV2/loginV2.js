@@ -1,8 +1,19 @@
 ﻿$(function () {
-    $('#txtUsername').val(getCookie("username"));
-    $('#txtPassword').val(getCookie("password"));
-    var rm = getCookie("remember");
-    $("#chkRememberMe").prop("checked", rm == "true");
+    //$('#txtUsername').val(getCookie("username"));
+    //$('#txtPassword').val(getCookie("password"));
+    //var rm = getCookie("remember");
+    //$("#chkRememberMe").prop("checked", rm == "true");
+    $.ajax({
+        type: "GET",
+        url: "/LoginV2/GetValuesFromCookies",
+        success: function (data) {
+            debugger
+            $('#txtUsername').val(data.username);
+            $('#txtPassword').val(data.password);
+            var rm = data.rememberMe;
+            $('#chkRememberMe').prop("checked", rm == "true");
+        }
+    })
 
     $.validator.setDefaults({
         submitHandler: function () {
