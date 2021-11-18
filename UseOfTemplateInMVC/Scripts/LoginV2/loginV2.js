@@ -1,15 +1,23 @@
 ﻿$(function () {
+    $('#txtUsername').val(getCookie("username"));
+    $('#txtPassword').val(getCookie("password"));
+    var rm = getCookie("remember");
+    $("#chkRememberMe").prop("checked", rm == "true");
+
     $.validator.setDefaults({
         submitHandler: function () {
-            var username = $('#exampleInputEmail1').val();
-            var password = $('#exampleInputPassword1').val();
+            var username = $('#txtUsername').val();
+            var password = $('#txtPassword').val();
+            var rememberme = $('#chkRememberMe').is(':checked');
+
             $.ajax({
                 type: "post",
                 url: "/LoginV2/LoginV2",
                 beforeSend: function () { loader.show() },
                 data: {
                     username: username,
-                    password: password
+                    password: password,
+                    rememberme: rememberme
                 },
                 success: function (data) {
                     loader.hide();
@@ -23,6 +31,17 @@
                     }
                     else {
                         toastr.success("Logged In Successfully.")
+                        ////Set and Remove Cookies from Client Side.
+                        //if (rememberme == true) {
+                        //    setCookie("username", $('#txtUsername').val(), 15);
+                        //    setCookie("password", $('#txtPassword').val(), 15);
+                        //    setCookie("remember", $('#chkRememberMe').is(':checked'), 15);
+                        //}
+                        //else {
+                        //    removeCookie("username")
+                        //    removeCookie("password")
+                        //    removeCookie("remember")
+                        //}
                         var id = data.id;
                         setTimeout(function () {
                             if (data.id != 0) {
