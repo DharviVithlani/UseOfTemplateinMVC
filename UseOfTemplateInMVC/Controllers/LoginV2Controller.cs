@@ -69,7 +69,7 @@ namespace UseOfTemplateInMVC.Controllers
                     {
                         Cookies.SetCookie("username", userdetails.UserName);
                         Cookies.SetCookie("password", userdetails.Password);
-                        Cookies.SetCookie("remember", rememberme.ToString());
+                        Cookies.SetCookie("remember", rememberme.ToString().ToLower());//to handle lower case in if condition to the client side.
                     }
                     else
                     {

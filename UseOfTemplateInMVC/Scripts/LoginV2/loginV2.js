@@ -2,7 +2,7 @@
     $('#txtUsername').val(getCookie("username"));
     $('#txtPassword').val(getCookie("password"));
     var rm = getCookie("remember");
-    $("#chkRememberMe").prop("checked", rm == "True");
+    $("#chkRememberMe").prop("checked", rm == "true");
 
     $.validator.setDefaults({
         submitHandler: function () {
@@ -31,6 +31,17 @@
                     }
                     else {
                         toastr.success("Logged In Successfully.")
+                        ////Set and Remove Cookies from Client Side.
+                        //if (rememberme == true) {
+                        //    setCookie("username", $('#txtUsername').val(), 15);
+                        //    setCookie("password", $('#txtPassword').val(), 15);
+                        //    setCookie("remember", $('#chkRememberMe').is(':checked'), 15);
+                        //}
+                        //else {
+                        //    removeCookie("username")
+                        //    removeCookie("password")
+                        //    removeCookie("remember")
+                        //}
                         var id = data.id;
                         setTimeout(function () {
                             if (data.id != 0) {
