@@ -21,5 +21,6 @@ namespace BusinessLogic.Common
         public const string SmtpLoginAttemptSubject = "LoginAttempt warning.";
         public const int BlockedHours = 24;
         public const int CookiesExpirationNoOfDays = 15;
+        public const string EncryptionKey = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZdharvi";
     }
 }
