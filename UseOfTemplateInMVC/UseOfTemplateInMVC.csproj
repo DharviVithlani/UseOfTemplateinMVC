@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
+    <Compile Include="Controllers\ConfirmEmailController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
@@ -222,6 +223,7 @@
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="CSS\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Layout\bootstrap.bundle.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -286,6 +288,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Upsert.cshtml" />
     <Content Include="Views\Shared\_breadcrumb.cshtml" />
+    <Content Include="Views\ConfirmEmail\ConfirmEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,33 @@
+﻿@model string
+@{
+    Layout = null;
+}
+<link href="~/CSS/fontawesome-free/css/all.min.css" rel="stylesheet" />
+<link href="~/CSS/adminlte.min.css" rel="stylesheet" />
+@if (Model == "Success")
+{
+    <div class="alert alert-success alert-dismissible">
+        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h6>Registration Successfull.</h6>
+        Please <a href="/LoginV2/LoginV2">Login</a>.
+    </div>
+}
+else if (Model == "AlreadyConfirmed")
+{
+    <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+        <h6>  Registration Already Confirmed.</h6>
+        Please <a href="/LoginV2/LoginV2">Login</a>.
+    </div>
+}
+else
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+        <h6>Registration Failed.</h6>
+        Please <a href="/Registration/NewRegistration">Registration</a>.
+    </div>
+}

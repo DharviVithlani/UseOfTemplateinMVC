@@ -14,6 +14,12 @@ namespace DataAccess
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.PinCodes = new HashSet<PinCode>();
+        }
+    
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -36,5 +42,8 @@ namespace DataAccess
         public Nullable<int> LoginFailedCount { get; set; }
         public Nullable<System.DateTime> LastPasswordChanged { get; set; }
         public Nullable<bool> IsBlock { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PinCode> PinCodes { get; set; }
     }
 }

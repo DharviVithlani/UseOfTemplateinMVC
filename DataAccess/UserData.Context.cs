@@ -32,6 +32,7 @@ namespace DataAccess
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<PinCode> PinCodes { get; set; }
     
         public virtual ObjectResult<uspGetUserByUserName_Result> uspGetUserByUserName(string userName)
         {
