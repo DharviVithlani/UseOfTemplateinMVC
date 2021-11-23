@@ -20,6 +20,16 @@
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="varchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="PinCode">
+          <Key>
+            <PropertyRef Name="PincodeId" />
+          </Key>
+          <Property Name="PincodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Pincode" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsConfirm" Type="bit" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -77,6 +87,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PinCode__UserId__656C112C">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PinCode" Type="Self.PinCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PinCode">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__State__CountryId__35BCFE0A">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="State" Type="Self.State" Multiplicity="*" />
@@ -106,12 +128,17 @@
         <EntityContainer Name="exampleModelStoreContainer">
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PinCode" EntityType="Self.PinCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__City__StateId__36B12243" Association="Self.FK__City__StateId__36B12243">
             <End Role="State" EntitySet="State" />
             <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PinCode__UserId__656C112C" Association="Self.FK__PinCode__UserId__656C112C">
+            <End Role="User" EntitySet="User" />
+            <End Role="PinCode" EntitySet="PinCode" />
           </AssociationSet>
           <AssociationSet Name="FK__State__CountryId__35BCFE0A" Association="Self.FK__State__CountryId__35BCFE0A">
             <End Role="Country" EntitySet="Country" />
@@ -150,6 +177,11 @@
           <FunctionImport Name="uspGetAllProducts" ReturnType="Collection(exampleModel.uspGetAllProducts_Result)" />
           <EntitySet Name="Products" EntityType="exampleModel.Product" />
           <EntitySet Name="Users" EntityType="exampleModel.User" />
+          <EntitySet Name="PinCodes" EntityType="exampleModel.PinCode" />
+          <AssociationSet Name="FK__PinCode__UserId__656C112C" Association="exampleModel.FK__PinCode__UserId__656C112C">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PinCode" EntitySet="PinCodes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="uspGetUserByUserName_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
@@ -270,7 +302,31 @@
           <Property Name="LoginFailedCount" Type="Int32" />
           <Property Name="LastPasswordChanged" Type="DateTime" Precision="3" />
           <Property Name="IsBlock" Type="Boolean" />
+          <NavigationProperty Name="PinCodes" Relationship="exampleModel.FK__PinCode__UserId__656C112C" FromRole="User" ToRole="PinCode" />
         </EntityType>
+        <EntityType Name="PinCode">
+          <Key>
+            <PropertyRef Name="PincodeId" />
+          </Key>
+          <Property Name="PincodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Pincode1" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsConfirm" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="exampleModel.FK__PinCode__UserId__656C112C" FromRole="PinCode" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__PinCode__UserId__656C112C">
+          <End Type="exampleModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="exampleModel.PinCode" Role="PinCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PinCode">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -388,6 +444,17 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PinCodes">
+            <EntityTypeMapping TypeName="exampleModel.PinCode">
+              <MappingFragment StoreEntitySet="PinCode">
+                <ScalarProperty Name="IsConfirm" ColumnName="IsConfirm" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Pincode1" ColumnName="Pincode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PincodeId" ColumnName="PincodeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

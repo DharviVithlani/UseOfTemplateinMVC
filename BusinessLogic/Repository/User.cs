@@ -43,18 +43,20 @@ namespace BusinessLogic.Repository
             var editrow = db.uspGetUserByUserName(name).FirstOrDefault();
             return editrow;
         }
-        public static void AddUpdateUser(UserData obj)
+        public static int AddUpdateUser(UserData obj)
         {
             exampleEntities db = new exampleEntities();
             if (obj.UserId == 0)
             {
                 var userdata = new DataAccess.User();
                 userdata.UserName = obj.UserName;
-                userdata.Password = Cryptography.Encryption(obj.Password); 
+                userdata.Password = Cryptography.Encryption(obj.Password);
                 userdata.CreatedDate = DateTime.Now;
                 userdata.IsActive = true;
                 userdata.IsBlock = false;
                 db.Users.Add(userdata);
+                db.SaveChanges();
+                return userdata.UserId;
             }
             else
             {
@@ -74,9 +76,10 @@ namespace BusinessLogic.Repository
                     editdata.ModifiedBy = obj.ModifiedBy;
                     editdata.IsActive = obj.IsActive;
                     db.Entry(editdata).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
+                return obj.UserId;
             }
-            db.SaveChanges();
         }
         public static IEnumerable<uspGetAllMembers_Result> GetMembers(string search, string searchby, string searchtype)
         {

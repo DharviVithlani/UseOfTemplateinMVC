@@ -4,6 +4,7 @@ using DataAccess;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Models;
+using BusinessLogic.Utility;
 
 namespace UseOfTemplateInMVC.Controllers
 {
@@ -67,13 +68,17 @@ namespace UseOfTemplateInMVC.Controllers
                         if (userexists != null)
                         {
                             obj.isSuccess = false;
-                            obj.ErrorMessage = "The username <b>"+ obj.UserName+"</b> is already exists. Please choose another.";
+                            obj.ErrorMessage = "The username <b>" + obj.UserName + "</b> is already exists. Please choose another.";
                         }
                         else
                         {
-                            BusinessLogic.Repository.User.AddUpdateUser(obj);
+                            var userId = BusinessLogic.Repository.User.AddUpdateUser(obj);
                             obj.isSuccess = true;
-                            obj.ErrorMessage = "The user <b>" + obj.UserName+ "</b> has been Added.";
+                            //  obj.ErrorMessage = "The user <b>" + obj.UserName + "</b> has been Added.";
+                            var pinCode = BusinessLogic.Repository.Pincode.AddPinCode(userId);
+                            var mailBody = "Thank you for registering with AdminLTE!! " + "<br>Please verify your email address by clicking " + "<a href='https://localhost:44369/ConfirmEmail/ConfirmEmail?pinCode=" + Cryptography.Encryption(pinCode) + "'>here.</a>" + "<br>Thank you, The AdminLTE Team.";
+                            EmailSender.SendEmail(obj.UserName, "Registration Confirmation Code", mailBody);
+                            obj.ErrorMessage = "Please check your Email and confirm your registration.";
                             obj.UserName = "";
                             ModelState.Clear();
                         }
