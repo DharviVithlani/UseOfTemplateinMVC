@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess;
-
+using BusinessLogic.Models;
 namespace BusinessLogic.Repository
 {
     public class Pincode
@@ -43,6 +44,22 @@ namespace BusinessLogic.Repository
                 }
             }
             return "Error";
+        }
+
+        public static UserPinInfo UserPinInfoByName(string userName)
+        {
+            exampleEntities db = new exampleEntities();
+            var innerJoin = from u in db.Users
+                            join p in db.PinCodes on u.UserId equals p.UserId
+                            where u.UserName == userName
+                            select new UserPinInfo
+                            {
+                                UserId = u.UserId,
+                                UserName=userName,
+                                Pincode = p.Pincode1,
+                                IsConfirm = p.IsConfirm,
+                            };
+            return innerJoin.FirstOrDefault();
         }
     }
 }

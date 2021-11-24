@@ -42,7 +42,10 @@
                                 </div>
                             </form>
                             <p class="mb-1">
-                                @Html.ActionLink("I forgot my password", "ForgotPassword", "ForgotPassword")
+                                <a href="#" onclick="ResendConfirmationEmail()">Resend email confirmation</a>
+                            </p>
+                            <p class="mb-1">
+                                @Html.ActionLink("I forgot my password", "ForgotPassword", "ForgotPassword")    
                             </p>
                             <p class="mb-0">
                                 @Html.ActionLink("Register a new membership", "NewRegistration", "Registration")
