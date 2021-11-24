@@ -98,3 +98,33 @@
         }
     });
 });
+function ResendConfirmationEmail() {
+    var username = $('#txtUsername').val();
+    if (username == "") {
+        toastr.error("Please enter username.")
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/ConfirmEmail/ResendEmailConfirmation",
+            dataType: "json",
+            data: {
+                userName: username
+            },
+            success: function (msg) {
+                if (msg == "incorrectUserName") {
+                    toastr.error("Username is incorrect.")
+                }
+                else if (msg == "resendConfirmationEmail") {
+                    toastr.success("Verification email sent. Please check your email.")
+                }
+                else if (msg == "alreadyConfirmedRegistration") {
+                    toastr.info("Your Registration is already confirmed. Please Login.")
+                }
+                else {
+                    toastr.error("Something went wrong.")
+                }
+            }
+        })
+    }
+}

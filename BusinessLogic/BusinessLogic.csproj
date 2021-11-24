@@ -97,6 +97,7 @@
     <Compile Include="Models\ChangePassword.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ProductData.cs" />
+    <Compile Include="Models\UserPinInfo.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\City.cs" />
