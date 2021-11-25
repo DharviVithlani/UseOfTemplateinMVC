@@ -17,6 +17,13 @@ namespace UseOfTemplateInMVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "LoginV2", action = "LoginV2", id = UrlParameter.Optional }
             );
+
+            //convention based routes
+            routes.MapRoute(
+             name: "MultipleParameters",
+             url: "{controller}/{action}/{id}/{name}",
+             defaults: new { controller = "Home", action = "MultipleParameters", id = UrlParameter.Optional,name = UrlParameter.Optional }
+         );
         }
     }
 }
