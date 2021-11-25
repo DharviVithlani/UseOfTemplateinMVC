@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,12 +12,13 @@ namespace BusinessLogic.Utility
 {
     public class Cryptography
     {
+        static string encryptionKey = ConfigurationManager.AppSettings["EncryptionKey"];
         public static string Encryption(string encryptString)
         {
             byte[] clearBytes = Encoding.Unicode.GetBytes(encryptString);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(Constants.EncryptionKey, new byte[] {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, new byte[] {
             0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76
         });
                 encryptor.Key = pdb.GetBytes(32);
@@ -40,7 +42,7 @@ namespace BusinessLogic.Utility
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(Constants.EncryptionKey, new byte[] {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, new byte[] {
             0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76
         });
                 encryptor.Key = pdb.GetBytes(32);
