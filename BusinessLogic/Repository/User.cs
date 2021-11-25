@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic.Utility;
+using System.Configuration;
 namespace BusinessLogic.Repository
 {
     public class User
     {
+        static int blockedHours =Convert.ToInt32(ConfigurationManager.AppSettings["BlockedHours"]);
         public static UserData GetUserById(int id)
         {
             exampleEntities db = new exampleEntities();
@@ -140,7 +142,7 @@ namespace BusinessLogic.Repository
                 {
                     userdetails.IsBlock = true;
                     DateTime currentTime = Convert.ToDateTime(userdetails.LastLoginAttempt);
-                    DateTime blockedTime = currentTime.AddHours(Constants.BlockedHours);
+                    DateTime blockedTime = currentTime.AddHours(blockedHours);
                     if (blockedTime <= DateTime.Now)
                     {
                         userdetails.LastLoginAttempt = DateTime.Now;
@@ -151,7 +153,7 @@ namespace BusinessLogic.Repository
             else
             {
                 DateTime currentTime = Convert.ToDateTime(userdetails.LastLoginAttempt);
-                DateTime blockedTime = currentTime.AddHours(Constants.BlockedHours);
+                DateTime blockedTime = currentTime.AddHours(blockedHours);
                 if (blockedTime <= DateTime.Now)
                 {
                     userdetails.IsBlock = false;

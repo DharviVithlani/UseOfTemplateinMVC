@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace BusinessLogic.Utility
         public static void SetCookie(string key, string value)
         {
             HttpContext.Current.Response.Cookies[key].Value = value;
-            HttpContext.Current.Response.Cookies[key].Expires = DateTime.Now.AddDays(Constants.CookiesExpirationNoOfDays);
+            HttpContext.Current.Response.Cookies[key].Expires = DateTime.Now.AddDays(Convert.ToInt32(ConfigurationManager.AppSettings["CookiesExpirationNoOfDays"]));
         }
 
         public static void RemoveCookieByKey(string key)
